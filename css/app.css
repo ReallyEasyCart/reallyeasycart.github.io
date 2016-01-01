@@ -42,6 +42,10 @@ body {
 	background: #3f51b5; /* indigo 500 */
 	color: #FFF;
 	text-decoration: none;
+    transition: all 0.5s;
+}
+.unit-inner:hover {
+    background: #536dfe; /* indigo A200 */
 }
 @media screen and (min-width: 35.5em) {
 	.unit {
