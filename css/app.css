@@ -38,17 +38,16 @@ body {
 .unit-inner {
 	flex: 1;
 	display: block;
-	margin: 0.5em;
+	margin: 0.2em;
 	padding: 1em;
-	border: 1px solid #536dfe; /* indigo A200 */
-	border-radius: 3px;
-	background: #3f51b5; /* indigo 500 */
+	border: 1px solid #3f51b5; /* indigo 500 */
+	background: #536dfe; /* indigo A200 */
 	color: #FFF;
 	text-decoration: none;
-    transition: all 0.5s;
+	transition: all 0.5s;
 }
 .unit-inner:hover {
-    background: #536dfe; /* indigo A200 */
+	background: #3f51b5; /* indigo 500 */
 }
 @media screen and (min-width: 35.5em) {
 	.unit {
