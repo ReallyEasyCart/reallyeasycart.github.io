@@ -26,6 +26,11 @@ body {
 	margin: 1em auto;
 }
 
+.page-footer {
+	margin: 1em auto;
+	text-align: center;
+}
+
 .grid {
 	display: flex;
 	flex-wrap: wrap;
