@@ -88,7 +88,7 @@ h1, h2, h3 {
 
 /* -- unit modifiers -- */
 .unit--learn .unit-inner { border-color: #03A9F4; }
-.unit--templates .unit-inner { border-color: #3F51B5; }
+.unit--snippets .unit-inner { border-color: #3F51B5; }
 .unit--builder .unit-inner { border-color: #009688; }
 .unit--examples .unit-inner { border-color: #8BC34A; }
 .unit--support .unit-inner { border-color: #9C27B0; }
