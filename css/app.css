@@ -1,12 +1,17 @@
 
+/* === Base === */
 body {
-	font: 14px/1.36 "Roboto", sans-serif;
+	font: 14px/1.36 "Lato", sans-serif;
 	padding: 1em;
 	background: #f5f8fa;
 }
 
 * {
 	box-sizing: border-box;
+}
+
+h1, h2, h3 {
+	font-weight: 300;
 }
 
 /* -- page layout -- */
@@ -19,7 +24,6 @@ body {
 	margin: 0;
 }
 .page-header h2 {
-	font-weight: normal;
 	margin: 0;
 	color: #444;
 }
