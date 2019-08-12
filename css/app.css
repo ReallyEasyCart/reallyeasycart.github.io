@@ -105,3 +105,16 @@ h1, h2, h3 {
     right: 0;
 }
 
+/* Examples page */
+.page-main--examples {
+	max-width: 100%;
+}
+.unit--examples .unit .unit-inner {
+	padding: 0;
+	border-top: 0;
+	margin: 1em;
+}
+.unit--examples .unit h1 {
+	padding: .5em 1em;
+	text-align: center;
+}
