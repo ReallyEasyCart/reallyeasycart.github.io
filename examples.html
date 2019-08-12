@@ -338,6 +338,51 @@
         </div>
     </main>
 
+    <!--
+        Opens a zoomed out preview in a modal window of a clicked example
+        (only when browser window is large, smaller screens recirect to the site instead)
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.andrew.recds12.co.uk/views/responsive-base/js/modules/jquery.remove-class-prefix.js"></script>
+    <script src="https://www.andrew.recds12.co.uk/views/responsive-base/js/modules/modal.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.7/css/fork-awesome.min.css"></script>
+    <link rel="stylesheet" href="https://www.andrew.recds12.co.uk/views/responsive-base/css/modules/modal.css"></script>
+    <script>
+    $('.unit-inner').on('click', function (e) {
+        if (Modernizr.mq('(min-width: 1000px)')) {
+            e.preventDefault();
+            new ModalWindow({
+                width: 1000,
+                header: 'View Full Site -> <a href="'+ $(this).attr('href') +'">'+ $(this).attr('href') +'</a> <span style="float:right;">(75% zoom)</span>',
+                content: '\
+                <div class="modal-iframe-container">\
+                    <iframe src="'+ $(this).attr('href') +'" frameborder="0"></iframe>\
+                </div>\
+                '
+            });
+        }
+    });
+    </script>
+    <style>
+    .modal-window-is-default .modal-window-inner {
+        margin: 2em auto;
+    }
+    .modal-iframe-container {
+        width: 975px;
+        height: 525px;
+        overflow: hidden;
+    }
+    .modal-window-body iframe {
+        width: 1300px;
+        height: 700px;
+        transform: scale(.75);
+        transform-origin: 0 0;
+        border: none;
+        min-height: 600px;
+    }
+    </style>
+
     <!-- Google Analytics -->
     <script>
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
