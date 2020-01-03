@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Content Blocks | REC+ Designer Hub by ReallyEasyCart</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+    <header class="page-header">
+        <h1>Content Blocks</h1>
+        <h2><a href="/">Return to REC+ Designer Hub</a></h2>
+    </header>
+
+    <div class="page-main page-main--with-sidebar-nav">
+
+        <nav class="page-sidebar-nav">
+            <ul>
+                <li>
+                    <a href="#">Intro</a>
+                </li>
+                <li>
+                    <a href="#types">Types</a>
+                    <ul>
+                        <li><a href="#type--text">text</a></li>
+                        <li><a href="#type--html">html</a></li>
+                        <li><a href="#type--image">image</a></li>
+                        <li><a href="#type--background-image">background-image</a></li>
+                        <li><a href="#type--map">map</a></li>
+                        <li><a href="#type--youtube">youtube</a></li>
+                        <li><a href="#type--page-url">page-url</a></li>
+                        <li><a href="#type--small-text">small-text</a></li>
+                        <li><a href="#type--link">link <span class="marker marker--new">New</span></a></li>
+                        <li><a href="#type--feature">feature <span class="marker marker--new">New</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#options">Options</a>
+                    <ul>
+                        <li><a href="#options--name">name</a></li>
+                        <li><a href="#options--type">type</a></li>
+                        <li><a href="#options--unique">unique</a></li>
+                        <li><a href="#options--template">template</a></li>
+                        <li><a href="#options--repeatable">repeatable <span class="marker marker--new">New</span></a></li>
+                        <li><a href="#options--listClass">listClass <span class="marker marker--new">New</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#recipes">Recipes</a>
+                    <ul>
+                        <li><a href="#recipes--simple-text-image">Simple</a></li>
+                        <li><a href="#recipes--image">Image</a></li>
+                        <li><a href="#recipes--owl-carousel">Owl carousel</a></li>
+                        <li><a href="#recipes--sub">Sub nav</a></li>
+                        <li><a href="#recipes--services">Services</a></li>
+                        <li><a href="#recipes--team-members">Team members</a></li>
+                        <li><a href="#recipes--quick-features">Quick features</a></li>
+                        <li><a href="#recipes--feature-sections">Feature sections</a></li>
+                        <li><a href="#recipes--article-style">Article style</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+
+            <p>Content blocks allow you to put the CMS back into page layouts.
+                <br>When a developer adds a <code>rec_block()</code> function into a Twig layout file, this renders an editor for it into the edit page view for the developer or site admins to use.</p>
+
+            <p>e.g. Say you want to have an editable title & text area with an image to the side.
+                In the layout you might do something like:</p>
+
+            <pre>
+                <code class="language-twig">
+&lt;div class=&quot;pure-g&quot;&gt;
+    &lt;div class=&quot;pure-u-1 pure-u-md-1-2&quot;&gt;
+        {{ rec_block('Title area', unique=true, type=&quot;html&quot;) }}
+    &lt;/div&gt;
+    &lt;div class=&quot;pure-u-1 pure-u-md-1-2&quot;&gt;
+        {{ rec_block('Title side image', unique=true, type=&quot;image&quot;) }}
+    &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+            </pre>
+
+            <!-- Types -->
+
+            <h1 id="types">Types of content blocks available:</h1>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque eveniet, commodi maiores alias sit possimus modi quisquam quam, labore at blanditiis voluptas velit necessitatibus veniam doloremque consectetur magnam dolore.</p>
+
+            <h2 id="type--text">text</h2>
+            <p>Textarea inputs for medium length text entry.</p>
+
+            <pre>
+                <code class="language-twig">
+{{ rec_block('Title area') }}
+                </code>
+            </pre>
+
+            <!-- Options -->
+
+            <h1 id="options">Option modifiers for content blocks:</h1>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque eveniet, commodi maiores alias sit possimus modi quisquam quam, labore at blanditiis voluptas velit necessitatibus veniam doloremque consectetur magnam dolore.</p>
+
+            <h2 id="options--name">name</h2>
+            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
+            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+
+            <pre>
+                <code class="language-twig">
+{{ rec_block('Name here') }}
+                </code>
+            </pre>
+
+
+            <!-- Recipes -->
+
+            <h1 id="recipes">Recipes to get started faster:</h1>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque eveniet, commodi maiores alias sit possimus modi quisquam quam, labore at blanditiis voluptas velit necessitatibus veniam doloremque consectetur magnam dolore.</p>
+
+            <h2 id="recipes--simple-text-image">Text with image right</h2>
+            <p>A simple example showing 2 content blocks to make up some text with an image to the side.</p>
+            <p>You can see later in these recipes that the <strong>feature</strong> type may often be a better fit for designs like this, but this is a useful example to know</p>
+
+        </main>
+
+    </div>
+
+    <!-- code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/nord.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/twig.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- Google Analytics -->
+    <script>
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script>
+    try {
+    var pageTracker = _gat._getTracker("UA-71313159-1");
+    pageTracker._trackPageview();
+    } catch(err) {}
+    </script>
+
+</body>
+</html>
