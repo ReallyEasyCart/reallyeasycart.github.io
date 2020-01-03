@@ -189,3 +189,12 @@ h1, h2, h3 {
 .marker--new {
 	background: deepskyblue;
 }
+.marker--type-string {
+	background: green;
+}
+.marker--type-array {
+	background: orangered;
+}
+.marker--type-boolean {
+	background: purple;
+}

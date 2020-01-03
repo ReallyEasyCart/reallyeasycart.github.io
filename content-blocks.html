@@ -89,7 +89,7 @@
 
             <h1 id="types">Types of content blocks available:</h1>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque eveniet, commodi maiores alias sit possimus modi quisquam quam, labore at blanditiis voluptas velit necessitatibus veniam doloremque consectetur magnam dolore.</p>
+            <p>Content blocks can render in many different types, here's a run down of what we have available.</p>
 
             <h2 id="type--text">text</h2>
             <p>Textarea inputs for medium length text entry.</p>
@@ -229,50 +229,63 @@ url('/uploaded/path/here')
 
             <!-- Options -->
 
-            <h1 id="options">Option modifiers for content blocks:</h1>
+            <h1 id="options">Options for content blocks:</h1>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque eveniet, commodi maiores alias sit possimus modi quisquam quam, labore at blanditiis voluptas velit necessitatibus veniam doloremque consectetur magnam dolore.</p>
+            <p>Option modifiers let you customise the content block. Options for making a block unique for each page it's on, or allowing them to store multiple values with repeatables. Here's a full list of what's available:</p>
 
-            <h2 id="options--name">name</h2>
+            <h2 id="options--name">name <span class="marker marker--type-string">string</span></h2>
             <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
             <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
             <pre><code class="language-twig">
 {{ rec_block("Name goes here") }}
             </code></pre>
 
-            <h2 id="options--name">name</h2>
-            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
-            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <h2 id="options--type">type <span class="marker marker--type-string">string</span></h2>
+            <p>The type defines how the block will be edited in the admin and rendered on the front end.</p>
+            <p>If you don't set a type it will default to text. A <a href="#types">full list of types is available above</a>.</p>
             <pre><code class="language-twig">
-{{ rec_block("Name") }}
+{{ rec_block("Name", type="type goes here") }}
             </code></pre>
 
-            <h2 id="options--name">name</h2>
-            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
-            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <h2 id="options--unique">unique <span class="marker marker--type-boolean">boolean</span></h2>
+            <p>By default, a block is only unqiue based on it's name being unique. That means if a block with the same name is shown on multiple pages it will have the same content.</p>
+            <p>The <code>unique=true</code> option let's you have the same named block on multiple pages but it will make sure it's content is unique for each page.</p>
             <pre><code class="language-twig">
-{{ rec_block("Name") }}
+{{ rec_block("Name", unique=true) }}
             </code></pre>
 
-            <h2 id="options--name">name</h2>
-            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
-            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <h2 id="options--template">template <span class="marker marker--type-boolean">boolean</span></h2>
+            <p>Using a test or editor type block and want to use system template tags or use twig functions inside? Passing <code>template=true</code> let's you do this.</p>
             <pre><code class="language-twig">
-{{ rec_block("Name") }}
+{{ rec_block("Name", template=true) }}
             </code></pre>
 
-            <h2 id="options--name">name</h2>
-            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
-            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <h2 id="options--repeatable">repeatable <span class="marker marker--type-boolean">boolean</span></h2>
+            <p>Repeatables let you save multiple versions on any block type. Multiple images, a list of multiple text lines or multiple feature blocks.</p>
+            <p>Making a new navigation, an image carousel, or multiple of any other block type is as easy as adding <code>repeatable=true</code>.</p>
+            <p>Repeatables render add & remove buttons in admin as well as are drag and drop sortable. On the front end they render in <code>&lt;ul&gt;</code> elements with each item in a <code>&lt;li&gt;</code>.</p>
             <pre><code class="language-twig">
-{{ rec_block("Name") }}
+{{ rec_block("Name", repeatable=true) }}
+            </code></pre>
+            <pre><code class="language-html">
+&lt;ul&gt;
+    &lt;li&gt;
+        First
+    &lt;/li&gt;
+    &lt;li&gt;
+        Second
+    &lt;/li&gt;
+    &lt;li&gt;
+        Third
+    &lt;/li&gt;
+&lt;/ul&gt;
             </code></pre>
 
-            <h2 id="options--name">name</h2>
-            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
-            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <h2 id="options--listClass">listClass <span class="marker marker--type-string">string</span></h2>
+            <p>When using repeatables you can pass <code>listClass</code> as a string of space separated class names to add to the <code>&lt;ul&gt;</code> element.</p>
+            <p>You can use this to add classes to style with, or for javascript use like <code>owl-carousel</code>, <a href="#recipes--owl-carousel">see owl example below</a></p>
             <pre><code class="language-twig">
-{{ rec_block("Name") }}
+{{ rec_block("Name", repeatable=true, listClass="your-class-name another-class") }}
             </code></pre>
 
 
@@ -280,7 +293,7 @@ url('/uploaded/path/here')
 
             <h1 id="recipes">Recipes to get started faster:</h1>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque eveniet, commodi maiores alias sit possimus modi quisquam quam, labore at blanditiis voluptas velit necessitatibus veniam doloremque consectetur magnam dolore.</p>
+            <p>These recipes are a bunch of pre-made examples to drop into any site and customise as freely.</p>
 
             <h2 id="recipes--simple-text-image">Text with image right</h2>
             <p>A simple example showing 2 content blocks to make up some text with an image to the side.</p>
@@ -294,6 +307,26 @@ url('/uploaded/path/here')
         {{ rec_block("Title side image", unique=true, type="image") }}
     &lt;/div&gt;
 &lt;/div&gt;
+            </code></pre>
+
+            <h2 id="recipes--owl-carousel">Owl carousel</h2>
+            <p>A simple example showing 2 content blocks to make up some text with an image to the side.</p>
+            <p>You can see later in these recipes that the <strong>feature</strong> type may often be a better fit for designs like this, but this is a useful example to know</p>
+            <pre><code class="language-twig">
+{{ rec_block('Image carousel', type="image", repeatable=true, listClass="plain-list owl-carousel owl-theme my-image-carousel") }}
+
+&lt;script&gt;
+jQuery('.my-image-carousel').owlCarousel({
+    loop: true,
+    margin: 10,
+    autoHeight: true,
+    responsive:{
+        0: { items: 1 },
+        500: { items: 2 },
+        1000: { items: 3 }
+    }
+});
+&lt;/script&gt;
             </code></pre>
 
         </main>
