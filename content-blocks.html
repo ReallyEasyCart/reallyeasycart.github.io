@@ -52,7 +52,7 @@
                 <li>
                     <a href="#recipes">Recipes</a>
                     <ul>
-                        <li><a href="#recipes--simple-text-image">Simple</a></li>
+                        <li><a href="#recipes--simple-text-image">Text with image right</a></li>
                         <li><a href="#recipes--image">Image</a></li>
                         <li><a href="#recipes--owl-carousel">Owl carousel</a></li>
                         <li><a href="#recipes--sub">Sub nav</a></li>
@@ -66,7 +66,7 @@
             </ul>
         </nav>
 
-        <main>
+        <main class="documentation-style-headers">
 
             <p>Content blocks allow you to put the CMS back into page layouts.
                 <br>When a developer adds a <code>rec_block()</code> function into a Twig layout file, this renders an editor for it into the edit page view for the developer or site admins to use.</p>
@@ -74,18 +74,16 @@
             <p>e.g. Say you want to have an editable title & text area with an image to the side.
                 In the layout you might do something like:</p>
 
-            <pre>
-                <code class="language-twig">
-&lt;div class=&quot;pure-g&quot;&gt;
-    &lt;div class=&quot;pure-u-1 pure-u-md-1-2&quot;&gt;
-        {{ rec_block('Title area', unique=true, type=&quot;html&quot;) }}
+            <pre><code class="language-twig">
+&lt;div class="pure-g"&gt;
+    &lt;div class="pure-u-1 pure-u-md-1-2"&gt;
+        {{ rec_block("Title area", unique=true, type="html") }}
     &lt;/div&gt;
-    &lt;div class=&quot;pure-u-1 pure-u-md-1-2&quot;&gt;
-        {{ rec_block('Title side image', unique=true, type=&quot;image&quot;) }}
+    &lt;div class="pure-u-1 pure-u-md-1-2"&gt;
+        {{ rec_block("Title side image", unique=true, type="image") }}
     &lt;/div&gt;
 &lt;/div&gt;
-                </code>
-            </pre>
+            </code></pre>
 
             <!-- Types -->
 
@@ -95,12 +93,139 @@
 
             <h2 id="type--text">text</h2>
             <p>Textarea inputs for medium length text entry.</p>
+            <p>The text type is the <strong>default</strong> for content blocks if you don't pass another type.</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name", type="text") }}
+            </code></pre>
 
-            <pre>
-                <code class="language-twig">
-{{ rec_block('Title area') }}
-                </code>
-            </pre>
+            <h2 id="type--html">html</h2>
+            <p>Allows entry of HTML by use of a wysiwyg editor.</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name", type="html") }}
+            </code></pre>
+
+            <h2 id="type--image">image</h2>
+            <p>Image uploader with advanced options available for alt text, link & an optional small screen version of the image for mobile to allow switching the image for small screens (e.g. if the large image contains small text you may want an image without the text or different sized text to show instead).</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name", type="image") }}
+            </code></pre>
+            This will return an image tag by default:
+            <pre><code class="language-html">
+&lt;img src="/uploaded/path/here"&gt;
+            </code></pre>
+            but can also return a link and picture tag if you're using advanced options, here's a full example with all options:
+            <pre><code class="language-html">
+&lt;a href="/some/link"&gt;
+    &lt;picture&gt;
+        &lt;source srcset="/uploaded/path/here" media="(max-width: 48em)"&gt;
+        &lt;img src="/uploaded/path/here" alt="image alt text"&gt;
+    &lt;/picture&gt;
+&lt;/a&gt;
+            </code></pre>
+            <p><span class="marker marker--new">New</span> See the recipes below for an example combining the image block type with the <code>repeatable=true</code> option to create an image carousel.</p>
+
+            <h2 id="type--background-image">background-image</h2>
+            <p>Image uploader but specifically for use with background images such as the background of a hero unit.</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name", type="background-image") }}
+            </code></pre>
+            This returns the image formatted for use in CSS:
+            <pre><code class="language-css">
+url('/uploaded/path/here')
+            </code></pre>
+
+            <h2 id="type--map">map</h2>
+            <p>This is a input for adding an address and on the front end we'll pass that address to Google Maps to render an interactive map.</p>
+            <p>As it returns an <code>iframe</code> we can utilise the "iframe-container" class to make it responsive and set an aspect ratio. (Available default aspect ratios: 5-1, 4-1, 3-1, 2-1, 3-2, 4-3, 1-1, but you can add more with css by varying the <code>padding-bottom</code>. You can also add -sm, -md, -lg or -xl to each class have different sizes kick in at different breakpoints, e.g. "iframe-container iframe-container-2-1 iframe-container-4-1-md")</p>
+            <pre><code class="language-twig">
+&lt;div class="iframe-container iframe-container-3-1"&gt;
+    {{ rec_block("Name", type="map") }}
+&lt;/div&gt;
+            </code></pre>
+            Given "123 Fake Street, Worcester, WR12AB" in admin, this will return:
+            <pre><code class="language-html">
+&lt;div class="iframe-container iframe-container-3-1"&gt;
+    &lt;iframe
+        width="450"
+        height="250"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/search?key=xxxxx&q=123+Fake+Street,+Worcester,+WR12AB"
+        allowfullscreen&gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+            </code></pre>
+
+            <h2 id="type--youtube">youtube</h2>
+            <p>This is a url input for adding a YouTube link and on the front end we'll embed the player for you.</p>
+            <p>As it returns an <code>iframe</code> we can utilise the "iframe-container" class to make it responsive and set an aspect ratio. (Available default aspect ratios: 5-1, 4-1, 3-1, 2-1, 3-2, 4-3, 1-1, but you can add more with css by varying the <code>padding-bottom</code>. You can also add -sm, -md, -lg or -xl to each class have different sizes kick in at different breakpoints, e.g. "iframe-container iframe-container-2-1 iframe-container-4-1-md")</p>
+            <pre><code class="language-twig">
+&lt;div class="iframe-container iframe-container-3-1"&gt;
+    {{ rec_block("Name", type="youtube") }}
+&lt;/div&gt;
+            </code></pre>
+            Given a YouTube video link like https://www.youtube.com/watch?v=RE87rQkXdNw we'd return:
+            <pre><code class="language-html">
+&lt;div class="iframe-container iframe-container-3-1"&gt;
+    &lt;iframe
+        width="560"
+        height="315"
+        src="https://www.youtube-nocookie.com/embed/RE87rQkXdNw"
+        frameborder="0"
+        allowfullscreen&gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+            </code></pre>
+
+            <h2 id="type--page-url">page-url</h2>
+            <p>Offers a dropdown of pages in page manager to select a page as an alternative to entering a url.</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name", type="page-url") }}
+            </code></pre>
+
+            <h2 id="type--small-text">small-text</h2>
+            <p>Similar to the text field but offers a smaller single line text input.</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name", type="small-text") }}
+            </code></pre>
+
+            <h2 id="type--link">link</h2>
+            <p>A quick way to insert a link with a single line text and url input.</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name", type="link") }}
+            </code></pre>
+            which returns a link element for you:
+            <pre><code class="language-html">
+&lt;a href="/some/link"&gt;
+    Text entered
+&lt;/a&gt;
+            </code></pre>
+
+            <h2 id="type--feature">feature</h2>
+            <p>Feature blocks are something a bit special with fields for uploading an image, title, text, with advanced options for link and link text all together.</p>
+            <p>We noticed a common pattern for building sites using content blocks & modules involves some combination of an image, text, title and optional link. In fact all those fields are optional so you can use an combination together.</p>
+            <p>This becomes especially powerful when combined with the <code>repeatable=true</code> option to form simpler versions of modules for the site without any setup.</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name", type="feature") }}
+            </code></pre>
+            which if all fields are entered will return:
+            <pre><code class="language-html">
+&lt;section class="cb-feature"&gt;
+    &lt;div class="cb-feature__image"&gt;
+        &lt;img src="/uploaded/path/here"&gt;
+    &lt;/div&gt;
+    &lt;header class="cb-feature__title"&gt;
+        &lt;h3&gt;Title here&lt;/h3&gt;
+    &lt;/header&gt;
+    &lt;p class="cb-feature__text"&gt;
+        &lt;img src="/uploaded/path/here"&gt;
+    &lt;/p&gt;
+    &lt;footer class="cb-feature__link"&gt;
+        &lt;a href="/link/path"&gt;Learn more&lt;/a&gt;
+    &lt;/footer&gt;
+&lt;/a&gt;
+            </code></pre>
+            <p><em>Each of those 4 elements inside the section are optional based on if the field is entered in admin. Also if a link_text is set but no link, the footer will change from a link to just the link text and it's class will adapt.</em></p>
+            <p><span class="marker marker--new">New</span> See the recipes below for many examples of the feature block type with repeatables.</p>
 
             <!-- Options -->
 
@@ -111,12 +236,44 @@
             <h2 id="options--name">name</h2>
             <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
             <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name goes here") }}
+            </code></pre>
 
-            <pre>
-                <code class="language-twig">
-{{ rec_block('Name here') }}
-                </code>
-            </pre>
+            <h2 id="options--name">name</h2>
+            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
+            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name") }}
+            </code></pre>
+
+            <h2 id="options--name">name</h2>
+            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
+            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name") }}
+            </code></pre>
+
+            <h2 id="options--name">name</h2>
+            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
+            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name") }}
+            </code></pre>
+
+            <h2 id="options--name">name</h2>
+            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
+            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name") }}
+            </code></pre>
+
+            <h2 id="options--name">name</h2>
+            <p>Name is the first & only required argument/option passed to <code>rec_block()</code>.</p>
+            <p>The name is how you'll reference this block in admin and if you want to re-use it</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name") }}
+            </code></pre>
 
 
             <!-- Recipes -->
@@ -128,6 +285,16 @@
             <h2 id="recipes--simple-text-image">Text with image right</h2>
             <p>A simple example showing 2 content blocks to make up some text with an image to the side.</p>
             <p>You can see later in these recipes that the <strong>feature</strong> type may often be a better fit for designs like this, but this is a useful example to know</p>
+            <pre><code class="language-twig">
+&lt;div class="pure-g"&gt;
+    &lt;div class="pure-u-1 pure-u-md-1-2"&gt;
+        {{ rec_block("Title area", unique=true, type="html") }}
+    &lt;/div&gt;
+    &lt;div class="pure-u-1 pure-u-md-1-2"&gt;
+        {{ rec_block("Title side image", unique=true, type="image") }}
+    &lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
 
         </main>
 

@@ -123,6 +123,8 @@ h1, h2, h3 {
 .page-sidebar-nav ul {
 	padding: 0;
 	list-style: none;
+}
+.page-sidebar-nav > ul {
 	position: sticky;
 	top: 0;
 	max-height: 100vh;
@@ -147,13 +149,34 @@ h1, h2, h3 {
 .page-sidebar-nav ul ul {
 	padding-left: 2em;
 }
+@media screen and (min-width: 35.5em) {
+	.page-sidebar-nav > ul {
+		display: flex;
+	}
+}
 @media screen and (min-width: 48em) {
+	.page-sidebar-nav > ul {
+		display: block;
+	}
 	.page-main--with-sidebar-nav {
 		max-width: 1000px;
 		display: grid;
-		grid-template-columns: 25% 75%;
+		grid-template-columns: repeat(4, 1fr);
 		grid-column-gap: 2em;
+		grid-template-areas: "nav main main main";
 	}
+	.page-main--with-sidebar-nav nav {
+		grid-area: nav;
+	}
+	.page-main--with-sidebar-nav main {
+		grid-area: main;
+	}
+}
+
+/* header style */
+.documentation-style-headers h1,
+.documentation-style-headers h2 {
+	margin-top: 2em;
 }
 
 /* markers for documentation use */
