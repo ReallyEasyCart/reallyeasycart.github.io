@@ -295,6 +295,9 @@ url('/uploaded/path/here')
 
             <p>These recipes are a bunch of pre-made examples to drop into any site and customise as freely.</p>
 
+            <p>In the following recipes with screenshots we have browser tested these in all modern browsers such as Google Chrome, Firefox, Safari, Opera, Edge, IE11 <em>& even support older versions as far back as IE9</em>.</p>
+            <p>Several utilise layouts with <a href="https://caniuse.com/#feat=css-grid">CSS Grid</a> &amp; <a href="https://caniuse.com/#feat=flexbox">Flexbox</a> both with great modern browser support and simple fallbacks in place.</p>
+
             <h2 id="recipe--simple-text-image">Text with image right</h2>
             <p>A simple example showing 2 content blocks to make up some text with an image to the side.</p>
             <p>You can see later in these recipes that the <strong>feature</strong> type may often be a better fit for designs like this, but this is a useful example to know</p>
@@ -386,11 +389,16 @@ jQuery('.my-image-carousel').owlCarousel({
     .services-list .cb-feature {
         display: flex;
     }
+    .no-flexbox .services-list > li {
+        display: inline-block;
+        vertical-align: top;
+    }
     .services-list {
         flex-wrap: wrap;
     }
     .services-list .cb-feature {
         flex-direction: column;
+        flex: 1;
     }
 
     /* 2 col */
@@ -423,6 +431,10 @@ jQuery('.my-image-carousel').owlCarousel({
 .team-list li {
     width: 50%;
     padding: .5em;
+}
+.no-flexbox .team-list li {
+    display: inline-block;
+    vertical-align: top;
 }
 @media screen and (min-width: 48em) {
     .team-list li {
@@ -458,6 +470,10 @@ jQuery('.my-image-carousel').owlCarousel({
 }
 .quick-features-list li {
     width: 50%;
+}
+.no-flexbox .quick-features-list li {
+    display: inline-block;
+    vertical-align: top;
 }
 @media screen and (min-width: 48em) {
     .quick-features-list li {
@@ -527,6 +543,10 @@ jQuery('.my-image-carousel').owlCarousel({
 }
 .article-style-list li {
     padding: 1em;
+}
+.no-flexbox .article-style-list li {
+    display: inline-block;
+    vertical-align: top;
 }
 @media screen and (min-width: 48em) {
     .article-style-list li {
