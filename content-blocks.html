@@ -47,6 +47,7 @@
                         <li><a href="#option--template">template</a></li>
                         <li><a href="#option--repeatable">repeatable <span class="marker marker--new">New</span></a></li>
                         <li><a href="#option--listClass">listClass <span class="marker marker--new">New</span></a></li>
+                        <li><a href="#option--asArray">asArray <span class="marker marker--new">New</span></a></li>
                     </ul>
                 </li>
                 <li>
@@ -286,6 +287,12 @@ url('/uploaded/path/here')
             <p>You can use this to add classes to style with, or for javascript use like <code>owl-carousel</code>, <a href="#recipe--owl-carousel">see owl example below</a></p>
             <pre><code class="language-twig">
 {{ rec_block("Name", repeatable=true, listClass="your-class-name another-class") }}
+            </code></pre>
+
+            <h2 id="option--asArray">asArray <span class="marker marker--type-boolean">boolean</span></h2>
+            <p>Allows you to debug the data saved easier & allows for more custom data transformations, e.g. taking a block type and building custom html for it.</p>
+            <pre><code class="language-twig">
+{{ rec_block("Name", asArray=true) }}
             </code></pre>
 
 
