@@ -51,6 +51,12 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#extras">Extras</a>
+                    <ul>
+                        <li><a href="#extra--isset">Isset checks <span class="marker marker--new">New</span></a></li>
+                    </ul>
+                </li>
+                <li>
                     <a href="#recipes">Recipes</a>
                     <ul>
                         <li><a href="#recipe--simple-text-image">Text with image right</a></li>
@@ -294,6 +300,23 @@ url('/uploaded/path/here')
             <p>Allows you to debug the data saved easier & allows for more custom data transformations, e.g. taking a block type and building custom html for it.</p>
             <pre><code class="language-twig">
 {{ rec_block("Name", asArray=true) }}
+            </code></pre>
+
+
+            <!-- Extras -->
+
+            <h1 id="extras">Extras:</h1>
+            <p>Here we'll have a few extra notes around content blocks that can be useful for more advanced designs and use cases.</p>
+
+            <h2 id="extra--isset">Isset checks</h2>
+            <p>You may run into cases where you need to check if a block has been filled out, maybe it's something optional for admins to enter? The isset check allows for this, it accepts a name & optionally the <code>unique=true</code> option.</p>
+            <p>This can also be useful to make sure you only wrap a block with a div for example if it's been filled out, e.g.</p>
+            <pre><code class="language-twig">
+{% if rec_block_isset('xyz') %}
+    &lt;div class="my-xyz-wrapper"&gt;
+        {{ rec_block('xyz', type="image") }}
+    &lt;/div&gt;
+{% endif %}
             </code></pre>
 
 
