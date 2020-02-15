@@ -161,7 +161,7 @@ h1, h2, h3 {
 	.page-main--with-sidebar-nav {
 		max-width: 1000px;
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 		grid-column-gap: 2em;
 		grid-template-areas: "nav main main main";
 	}
