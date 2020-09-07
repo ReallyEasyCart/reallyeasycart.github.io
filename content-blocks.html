@@ -36,6 +36,7 @@
                         <li><a href="#type--small-text">small-text</a></li>
                         <li><a href="#type--link">link <span class="marker marker--new">New</span></a></li>
                         <li><a href="#type--feature">feature <span class="marker marker--new">New</span></a></li>
+                        <li><a href="#type--model">model <span class="marker marker-new">New</span></a></li>
                     </ul>
                 </li>
                 <li>
@@ -234,6 +235,13 @@ url('/uploaded/path/here')
             <p>A sort of hidden feature of the elements inside this block type is that we auto define them for you as CSS grid-areas. This means you can quickly use CSS grid to lay them out with the names image, title, text, link and link_text if no link given. You'll see this in use in the recipes.</p>
             <p><a href="https://ishadeed.com/article/grid-area/" target="_blank">Learn more about CSS Grid template areas here.</a></p>
             <p><span class="marker marker--new">New</span> See the <a href="#recipes">recipes below</a> for many examples of the feature block type with repeatables.</p>
+
+            <h2 id="type--model">model</h2>
+            <p>Model blocks allow you to add 3D Models (with Augmented Reality) to a page.</p>
+            <pre><code class="language-twig">
+{{ rec_block('3D Model', type="model") }}
+            </code></pre>
+            <p>When viewing the block in Page Manager/Content Block Manager it will then ask for a .glb or .gltf file (for the basic 3D Model and AR on Android) and a .usdz file (for AR support on iPhones/iOS 12+).</p>
 
             <!-- Options -->
 
