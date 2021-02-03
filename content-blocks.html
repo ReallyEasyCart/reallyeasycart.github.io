@@ -54,7 +54,8 @@
                 <li>
                     <a href="#extras">Extras</a>
                     <ul>
-                        <li><a href="#extra--isset">Isset checks <span class="marker marker--new">New</span></a></li>
+                        <li><a href="#extra--isset">Isset checks</a></li>
+                        <li><a href="#extra--enabled">Enabled checks <span class="marker marker--new">New</span></a></li>
                     </ul>
                 </li>
                 <li>
@@ -321,6 +322,16 @@ url('/uploaded/path/here')
             <p>This can also be useful to make sure you only wrap a block with a div for example if it's been filled out, e.g.</p>
             <pre><code class="language-twig">
 {% if rec_block_isset('xyz') %}
+    &lt;div class="my-xyz-wrapper"&gt;
+        {{ rec_block('xyz', type="image") }}
+    &lt;/div&gt;
+{% endif %}
+            </code></pre>
+
+            <h2 id="extra--enabled">Enabled checks</h2>
+            <p>Similar to the above isset check, you can also check if it's enabled, this makes it easier for you & admins to turn content blocks on and off, e.g.</p>
+            <pre><code class="language-twig">
+{% if rec_block_enabled('xyz') %}
     &lt;div class="my-xyz-wrapper"&gt;
         {{ rec_block('xyz', type="image") }}
     &lt;/div&gt;
