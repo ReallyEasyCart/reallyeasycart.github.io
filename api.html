@@ -72,7 +72,8 @@
                     <h2 id="introduction">Introduction</h2>
                 </header>
 
-                <p>REC+ sites have a RESTful API available to lookup or modify data. They also support webhooks which can send API objects to you on specific events such as <code>new.order</code>.</p>
+                <p>REC+ sites have a RESTful API available to lookup or modify data.
+                    They also support webhooks which can send API objects to you on specific events such as <code>new.order</code>.</p>
 
             </section>
 
@@ -979,8 +980,8 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <p>All resources support "limit" and "offset" which case be used to page results, generally the default on lists is 25.</p>
-                <p>Also most resources should support the "fields=*" url param, which allows full data on each views to be pulled back instead of just the basic data. </p>
+                <p>All resources support "limit" and "offset" which can be used to page through results, generally the default on lists is 25 and the max for the limit is generally 1000.</p>
+                <p>Also most collection resources should support the "fields=*" url param, which allows full data on each views to be pulled back instead of just the basic data. </p>
 
             </section>
 
@@ -989,9 +990,8 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <h2 id="api-webhooks">API Webhooks</h2>
                 </header>
 
-                <p>Webhooks react to events on the site and send to a specific endpoint. </p>
-
-                <p>This allows you to host your own endpoint and receive in our API objects on events such as <code>new.order</code>.</p>
+                <p>Webhooks react to events on the site and send to a specific endpoint.
+                    <br>This allows you to host your own endpoint and receive in our API objects on events such as <code>new.order</code>.</p>
 
                 <p>Webhooks send the same API objects as you’d get looking up that data from the API, e.g. <code>new.order</code> for order #123 would send you the JSON the same as you’d get if you were to request: <code>/api/v1/orders/123</code> via the API.</p>
 
@@ -1000,6 +1000,10 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <p>
                     <img src="/images/api/api-webhooks.png" alt="API Webhooks view">
                 </p>
+
+                <p>Webhooks support sending directly with HTTPS but optionally can also send with HTTP Basic Auth or HTTP Bearer Auth (for JWT). Like the API itself, they also support sending as XML if required though JSON is recommended.</p>
+
+                <p>To accept multiple webhook events, you could add multiple webhooks with different URLs, or use a single endpoint URL and enable the "Wrap Data" option which wil send the API object wrapped in an outer object that indicates which event triggered it, e.g. <code>{"event": "event.name", "data": {...}}</code></p>
             </section>
 
             <section class="doc-section">
@@ -1024,6 +1028,8 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <p>
                     <img src="/images/api/api-event-sim.png" alt="API Event Simulator view">
                 </p>
+
+                <p>This saves you from needing to continuously place orders or add/update products to test you integration.</p>
             </section>
 
             <section class="doc-section">
@@ -1033,9 +1039,9 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
 
                 <p>This quick overview is meant to help get you started with the API.</p>
 
-                <p>We also have more <a href="https://reallyeasycart.freshdesk.com/support/solutions/folders/269622">detailed documentation available here</a>.</p>
+                <p>We also have <a href="https://reallyeasycart.freshdesk.com/support/solutions/folders/269622">additional documentation available here</a>.</p>
 
-                <p>Also feel free to contact us via our <a href="https://reallyeasycart.freshdesk.com/support">support tickets here</a>.</p>
+                <p>Please also feel free to contact us via our <a href="https://reallyeasycart.freshdesk.com/support">support tickets here</a>.</p>
 
                 <p>Thanks for reading.</p>
             </section>
