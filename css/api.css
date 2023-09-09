@@ -89,7 +89,7 @@ a {
 	z-index: -1;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
 	.page-wrapper {
 		display: flex;
 		gap: 30px;
@@ -111,6 +111,12 @@ a {
 	.page-main code {
 		text-wrap: wrap;
 		word-break: break-word;
+	}
+
+	/* scroll the sidebar with us */
+	.page-sidebar ul {
+		position: sticky;
+		top: 60px;
 	}
 }
 
