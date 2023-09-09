@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>REC+ API</title>
+
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com/">
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,700">
+    <link rel="stylesheet" href="/css/api.css?v2">
+</head>
+<body>
+
+    <header class="page-header">
+        <h1>
+            REC+ API
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 96c0-35.3 28.7-64 64-64H512c35.3 0 64 28.7 64 64V352H512V96H128V352H64V96zM0 403.2C0 392.6 8.6 384 19.2 384H620.8c10.6 0 19.2 8.6 19.2 19.2c0 42.4-34.4 76.8-76.8 76.8H76.8C34.4 480 0 445.6 0 403.2zM281 209l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-48-48c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM393 175l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></svg>
+                Quick Guide
+            </span>
+        </h1>
+    </header>
+
+    <div class="page-wrapper">
+
+        <nav class="page-sidebar">
+            <ul>
+                <li>
+                    <strong>Contents</strong>
+                </li>
+                <li>
+                    <a href="#introduction">Introduction</a>
+                </li>
+                <li>
+                    <a href="#api-accounts">API Accounts</a>
+                </li>
+                <li>
+                    <a href="#auth-scopes">Auth & Scopes</a>
+                </li>
+                <li>
+                    <a href="#access-examples">Access Examples</a>
+                </li>
+                <li>
+                    <a href="#responses">Responses</a>
+                </li>
+                <li>
+                    <a href="#resources">Resources</a>
+                </li>
+                <li>
+                    <a href="#api-webhooks">API Webhooks</a>
+                </li>
+                <li>
+                    <a href="#api-explorer">API Explorer</a>
+                </li>
+                <li>
+                    <a href="#further-reading">Further Reading</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="page-main">
+
+            <section class="doc-section">
+                <header>
+                    <h2 id="introduction">Introduction</h2>
+                </header>
+
+                <p>REC+ sites have a RESTful API available to lookup or modify data. They also support webhooks which can send API objects to you on specific events such as <code>new.order</code>.</p>
+
+            </section>
+
+            <section class="doc-section">
+                <header>
+                    <h2 id="api-accounts">API Accounts</h2>
+                </header>
+
+                <p>Set up or request API Access via admin.</p>
+
+                <p>To set up an account when logged in to the Admin area, open API Accounts on the sidebar.
+                    <br>Set your account details and the scopes you need access to.</p>
+
+                <p>You will then be provided both a Public API key & Full API Access (limited by scopes) via <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">HTTP Basic Auth</a>.</p>
+
+                <p>Manage or view the logs of your API account any time via the same API Access area in Admin.</p>
+
+                <p>
+                    <img src="/images/api/api-accounts.png" alt="API Accounts View">
+                </p>
+            </section>
+
+            <section class="doc-section">
+                <header>
+                    <h2 id="auth-scopes">Auth & Scopes</h2>
+                </header>
+
+                <p>Public key access only gives you access to public data, such as product listings. It does not allow access to private store data such as orders, nor does it allow you to make any modifications.</p>
+
+                <p>To access (& modify) everything allowed by your scopes, you&apos;ll need to use <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication">HTTP Basic Auth</a> with the Full API username & password. </p>
+
+                <p>Scopes limit the access your account has, such as if your app only needs access to Orders, you can limit your scope to only Orders. </p>
+
+                <p>Currently available scopes:
+                    <br><code>store_content</code> - Manages the products, categories, etc.
+                    <br><code>content</code> - Manages the downloads, blog_items, pages, etc.
+                    <br><code>users</code> - Manages the users, user groups, etc.)
+                    <br><code>orders</code> - Manages the orders, payment methods, delivery, etc.
+                </p>
+            </section>
+
+            <section class="doc-section">
+                <header>
+                    <h2 id="access-examples">Access Examples</h2>
+                </header>
+
+                <p>
+                    <small>Replace {DOMAIN} with the website domain name, as well as {API_USER} & {API_PASS} with your assigned API username & password.</small>
+                </p>
+
+                <p><strong>Curl:</strong></p>
+
+                <pre><code class="language-bash hljs"># Lookup all products
+curl "https://{DOMAIN}/api/v1/products" --user {API_USER}:{API_PASS} 
+
+# Lookup specific product by code
+curl "https://{DOMAIN}/api/v1/products/test?identifier=code" --user {API_USER}:{API_PASS} 
+
+# Update specific product by code
+curl -X POST -d @data.json "https://{DOMAIN}/api/v1/products/test?identifier=code" --user {API_USER}:{API_PASS}
+
+# Batch update products
+curl -X POST -d @data.json "https://{DOMAIN}/api/v1/products" --user {API_USER}:{API_PASS} 
+</code></pre>
+
+                <p><strong>PHP:</strong></p>
+
+                <pre><code class="language-php hljs">class REC
+{
+    protected static string $api_user = '{API_USER}';
+    protected static string $api_pass = '{API_PASS}';
+    protected static string $base = 'https://{DOMAIN}';
+
+    public static function api(string $method, string $resource, ?array $data = null): object
+    {
+        $ch = curl_init(static::$base . '/api/v1' . $resource);
+        curl_setopt($ch, CURLOPT_USERPWD, static::$api_user . ':' . static::$api_pass);
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $method = strtoupper($method);
+        if ($method === 'POST') {
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data, JSON_THROW_ON_ERROR));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        } elseif ($method !== 'GET') {
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+        }
+        $response = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return (object) [
+            'status' => $status,
+            'response' => $response ? json_decode($response, false, 512, JSON_THROW_ON_ERROR) : null,
+        ];
+    }
+}
+</code></pre>
+
+                <pre><code class="language-php hljs">// Lookup all products
+$products = REC::api('GET', '/products');
+
+// Lookup specific product by code
+$productCode = 'test';
+$product = REC::api('GET', '/products/' . $productCode . '?identifier=code');
+
+// Create new product
+$product = REC::api('POST', '/products', [
+    'products' => [[
+        'code' => 'test',
+        'name' => 'Test Product',
+    ]],
+]);
+
+// Update specific product by code
+$product = REC::api('POST', '/products/' . $productCode . '?identifier=code', [
+    'name' => 'Test Product UPDATED',
+]);
+
+// Batch update products
+$products = REC::api('POST', '/products?identifier=code', [
+    'products' => [
+        [
+            'code' => 'test',
+            'name' => 'Test Product',
+        ],
+        [
+            'code' => 'test2', // or this will insert if code not found
+            'name' => 'Test Product 2',
+        ],
+    ],
+]);
+
+// Delete specific product by code
+$product = REC::api('DELETE', '/products/' . $productCode . '?identifier=code');
+
+// Batch delete products
+$products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
+    'test',
+    'test2',
+]));
+</code></pre>
+                
+            </section>
+
+            <section class="doc-section">
+                <header>
+                    <h2 id="responses">Responses</h2>
+                </header>
+
+                <p>By default the API returns JSON responses however it can also return XML if needed.</p>
+
+                <p>All products example JSON:</p>
+                <pre><code class="language-json hljs">{
+    "href": "\/products.json?fields=&identifier=",
+    "products": [
+        {
+            "href": "\/products\/58663.json",
+            "id": 58663,
+            "name": "HOT SAUCE GIFT VOUCHER",
+            "code": "Sauce-gift-voucher",
+            "status": "live",
+            "link": "http:\/\/rec.localhost\/HOT_SAUCE_GIFT_VOUCHER--product--58663.html",
+            "image": "http:\/\/rec.localhost\/userfiles\/images\/sys\/products\/HOT_SAUCE_GIFT_VOUCHER_67999_0.jpg",
+            "price": {
+                "normal": "400.00",
+                "special_offer": "0.00"
+            }
+        },
+        {
+            "href": "\/products\/58662.json",
+            "id": 58662,
+            "name": "Tubby Tom&#039;s The Squealer Hot Sauce 150g",
+            "code": "Sauce-997706",
+            "status": "live",
+            "link": "http:\/\/rec.localhost\/Tubby_Tom039s_The_Squealer_Hot_Sauce_150g--product--58662.html",
+            "image": "http:\/\/rec.localhost\/userfiles\/images\/sys\/products\/Tubby_Toms_The_Squealer_Hot_Sauce_150g_12652_0.jpg",
+            "price": {
+                "normal": "8.40",
+                "special_offer": "0.00"
+            }
+        },
+        {
+            "href": "\/products\/58661.json",
+            "id": 58661,
+            "name": "Traeger Texas Spicy BBQ Sauce 16oz",
+            "code": "Sauce-1105410",
+            "status": "live",
+            "link": "http:\/\/rec.localhost\/Traeger_Texas_Spicy_BBQ_Sauce_16oz--product--58661.html",
+            "image": "http:\/\/rec.localhost\/userfiles\/images\/sys\/products\/Traeger_Texas_Spicy_BBQ_Sauce_16oz_70879jpeg.jpg",
+            "price": {
+                "normal": "132.00",
+                "special_offer": "0.00"
+            }
+        }
+    ],
+    "count": 25,
+    "total_count": 83,
+    "paging": {
+        "offset": 0,
+        "limit": 25,
+        "first_page_href": "\/products.json?fields=&identifier=&limit=25&offset=0",
+        "last_page_href": "\/products.json?fields=&identifier=&limit=25&offset=75",
+        "next_page_href": "\/products.json?fields=&identifier=&limit=25&offset=25",
+        "previous_page_href": null
+    }
+}
+</code></pre>
+
+                <p>Specific product example JSON:</p>
+                <pre><code class="language-json hljs">{
+    "href": "\/products\/58661.json",
+    "id": 58661,
+    "name": "Traeger Texas Spicy BBQ Sauce 16oz",
+    "code": "Sauce-1105410",
+    "status": "live",
+    "link": "http:\/\/rec.localhost\/Traeger_Texas_Spicy_BBQ_Sauce_16oz--product--58661.html",
+    "image": "http:\/\/rec.localhost\/userfiles\/images\/sys\/products\/Traeger_Texas_Spicy_BBQ_Sauce_16oz_70879jpeg.jpg",
+    "price": {
+        "normal": "132.00",
+        "special_offer": "0.00"
+    },
+    "additional_images": [
+        
+    ],
+    "short_desc": "",
+    "desc": "&lt;p>&nbsp;&lt;\/p&gt;\n\n&lt;p&gt;&lt;strong&gt;Why we love it:&lt;\/strong&gt;&lt;\/p&gt;\n\n&lt;p&gt;Features peppery heat that&rsquo;s awesome with wings or pulled pork, and its thinner consistency makes it a great choice for marinating, too.&lt;\/p&gt;\n\n&lt;p&gt;Spicy, peppery sauce with that works as marinade or sauce&lt;\/p&gt;\n\n&lt;p&gt;Great on everything from chicken and pork to beef&lt;\/p&gt;\n\n&lt;p&gt;&lt;br \/&gt;\n&lt;strong&gt;What you need to know:&lt;\/strong&gt;&lt;\/p&gt;\n\n&lt;p&gt;1 x Traeger Texas Spicy BBQ Sauce 16oz&lt;\/p&gt;\n\n&lt;p&gt;Size: 16oz \/ 473ml&lt;\/p&gt;\n",
+    "tax_class": 1,
+    "additional_prices": [
+        
+    ],
+    "categories": {
+        "default": {
+            "href": "\/categories\/24001.json",
+            "id": 24001
+        },
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null
+    },
+    "date_added": "2023-07-25T17:31:44",
+    "date_modified_admin": "2023-07-25T18:07:10",
+    "date_modified_api": null,
+    "sort_order": 0,
+    "custom_sort_order": {
+        "featured": 0,
+        "special": 0
+    },
+    "delivery": {
+        "costs_to_zones": [
+            
+        ],
+        "free_delivery": 0,
+        "free_delivery_zone": 0
+    },
+    "manufacturer": null,
+    "stock": {
+        "qty": 1980,
+        "options_group_use_as_stock": "",
+        "pack_qty": 1,
+        "alert_qty": "",
+        "stop_qty": "",
+        "back_in_stock_date": ""
+    },
+    "marketing_site_link": "",
+    "hide_prices": false,
+    "is_enquiry_only": false,
+    "banner_text": "",
+    "banner_color": "#",
+    "model_3d_image_path": "",
+    "model_3d_image_path_ios": "",
+    "download": null,
+    "additional_downloads": [
+        
+    ],
+    "options": [
+        {
+            "id": 12347,
+            "group": "Multi Pack",
+            "desc": "Yes",
+            "code": "",
+            "price": "4.20",
+            "special_price": "",
+            "weight": "",
+            "stock_qty": 981,
+            "sort_order": 1,
+            "hidden": false,
+            "gtin": "",
+            "cost": "",
+            "sync_key": "RGe0x2",
+            "group_prices": {
+                
+            },
+            "group_special_prices": {
+                
+            }
+        },
+        {
+            "id": 12348,
+            "group": "Multi Pack",
+            "desc": "No",
+            "code": "",
+            "price": "0.00",
+            "special_price": "",
+            "weight": "",
+            "stock_qty": 999,
+            "sort_order": 2,
+            "hidden": false,
+            "gtin": "",
+            "cost": "",
+            "sync_key": "Rr09B2",
+            "group_prices": {
+                
+            },
+            "group_special_prices": {
+                
+            }
+        },
+        {
+            "id": 12349,
+            "group": "Saver Discount",
+            "desc": "Yes",
+            "code": "",
+            "price": "1.20",
+            "special_price": "",
+            "weight": "",
+            "stock_qty": 1980,
+            "sort_order": 3,
+            "hidden": false,
+            "gtin": "",
+            "cost": "",
+            "sync_key": "E49NjR",
+            "group_prices": {
+                
+            },
+            "group_special_prices": {
+                
+            }
+        }
+    ],
+    "attributes": [
+        
+    ],
+    "weight": "",
+    "youtube_clip": "",
+    "videos": [
+        
+    ],
+    "cost_price": "",
+    "is_digital": false,
+    "is_addon_product": false,
+    "is_discontinued": false,
+    "exclude_from_api_webhook": false,
+    "triggers_event_system": true,
+    "special_offer_start_date": null,
+    "special_offer_end_date": null,
+    "meta_title": "",
+    "meta_keywords": "",
+    "meta_description": "",
+    "exclude_from_google_base": false,
+    "google_product_category": "",
+    "purchase_event": null,
+    "bundle": {
+        "sync_stock_with_components": false,
+        "sync_price_with_components": false,
+        "sync_cost_with_components": false,
+        "sync_weight_with_components": false,
+        "is_bundle": false,
+        "assembly_instructions": "",
+        "assembly_bin_location": ""
+    },
+    "launch_date": "0000-00-00 00:00:00",
+    "launch_status": "live",
+    "packaging_type_id": 1,
+    "tags": {
+        "Design": [
+            
+        ],
+        "Warnings": [
+            
+        ],
+        "Colours": [
+            
+        ],
+        "Season": [
+            
+        ],
+        "Product Ranges": [
+            
+        ],
+        "No products match this group": [
+            
+        ],
+        "Forge Example": [
+            
+        ]
+    },
+    "associations": [
+        
+    ],
+    "alternatives": [
+        
+    ],
+    "addons": [
+        
+    ],
+    "components": [
+        
+    ],
+    "variations": [
+        {
+            "code": "Sauce-1105410-yes-yes",
+            "prev_codes": "",
+            "stock": 981,
+            "cost": "",
+            "options": {
+                "Multi Pack": "Yes",
+                "Saver Discount": "Yes"
+            }
+        },
+        {
+            "code": "Sauce-1105410-no-yes",
+            "prev_codes": "",
+            "stock": 999,
+            "cost": "",
+            "options": {
+                "Multi Pack": "No",
+                "Saver Discount": "Yes"
+            }
+        }
+    ]
+}</code></pre>
+
+                <p>Example error response: <small>HTTP status also reflects the error status</small></p>
+                <pre><code class="language-json hljs">{
+    "errors": [
+        {
+            "status": 404,
+            "message": "Product not found"
+        }
+    ]
+}</code></pre>
+
+                <p>Specific order example JSON:</p>
+                <pre><code class="language-json hljs">{
+    "href": "\/orders\/112312.json",
+    "id": 112312,
+    "invoice_id": 825,
+    "session_id": "s.64bf9a63f18ea5.12594747",
+    "start_date": "2023-07-26T00:03:07",
+    "payment_date": "2023-07-26T00:03:59",
+    "payment_method": {
+        "href": "\/payment-methods\/58.json",
+        "id": 58,
+        "name": "PayPal Express Checkout"
+    },
+    "payment_data": {
+        "verify_sign": "",
+        "payer_id": "",
+        "payer_status": ""
+    },
+    "status": "Payment Received",
+    "user": {
+        "href": "\/users\/123.json",
+        "id": 123,
+        "full_name": "Bob Smith",
+        "membership_code": "",
+        "email": "bob@smithnet.co.uk",
+        "billing_address": {
+            "recipient_name": "Bob Smith",
+            "business_name": "",
+            "line_1": "12 Fake Street",
+            "line_2": "",
+            "town": "Worcester",
+            "region": {
+                "href": "\/regions\/244.json",
+                "country": "United States",
+                "county": "Alabama"
+            },
+            "post_code": "WR1 1AB",
+            "tel_no": "07123456789",
+            "mobile_tel_no": "",
+            "fax_no": ""
+        }
+    },
+    "delivery_address": {
+        "recipient_name": "Bob Smith",
+        "business_name": "",
+        "line_1": "12 Fake Street",
+        "line_2": "",
+        "town": "Worcester",
+        "region": {
+            "href": "\/regions\/243.json",
+            "country": "UK",
+            "county": "Worcestershire"
+        },
+        "post_code": "WR1 1AB",
+        "tel_no": "07123456789",
+        "mobile_tel_no": "",
+        "fax_no": ""
+    },
+    "tracking": {
+        "medium": "direct",
+        "source": "",
+        "term": "",
+        "using_stored_data": 0
+    },
+    "totals": {
+        "qty": 3,
+        "price": "0.00",
+        "vat": "25.70",
+        "weight": 0,
+        "delivery": "0.00"
+    },
+    "lines": [
+        {
+            "id": 19990,
+            "line_rel_id": 19988,
+            "line_type": "OPTION",
+            "line_desc": "Saver Discount - Yes ",
+            "rel_data": {
+                "option": {
+                    "href": "\/options\/12349.json",
+                    "id": 12349,
+                    "group": "Saver Discount",
+                    "desc": "Yes",
+                    "code": "",
+                    "product": {
+                        "href": "\/products\/58661.json",
+                        "id": 58661
+                    }
+                }
+            },
+            "status": "Payment Received",
+            "qty": 1,
+            "price": "0.00",
+            "vat": "0.00",
+            "vat_percentage": 20,
+            "each_price_ex_vat": 0,
+            "each_price_vat": 0,
+            "each_price_discount_ex_vat": "0.00",
+            "each_price_discount_vat": 0,
+            "weight": 0
+        },
+        {
+            "id": 19989,
+            "line_rel_id": 19988,
+            "line_type": "OPTION",
+            "line_desc": "Multi Pack - Yes ",
+            "rel_data": {
+                "option": {
+                    "href": "\/options\/12347.json",
+                    "id": 12347,
+                    "group": "Multi Pack",
+                    "desc": "Yes",
+                    "code": "",
+                    "product": {
+                        "href": "\/products\/58661.json",
+                        "id": 58661
+                    }
+                }
+            },
+            "status": "Payment Received",
+            "qty": 1,
+            "price": "0.00",
+            "vat": "0.00",
+            "vat_percentage": 20,
+            "each_price_ex_vat": 0,
+            "each_price_vat": 0,
+            "each_price_discount_ex_vat": "0.00",
+            "each_price_discount_vat": 0,
+            "weight": 0
+        },
+        {
+            "id": 19988,
+            "line_rel_id": 0,
+            "line_type": "PRODUCT",
+            "line_desc": "Traeger Texas Spicy BBQ Sauce 16oz - Sauce-1105410-yes-yes",
+            "rel_data": {
+                "product": {
+                    "href": "\/products\/58661.json",
+                    "id": 58661,
+                    "name": "Traeger Texas Spicy BBQ Sauce 16oz",
+                    "code": "Sauce-1105410-yes-yes"
+                }
+            },
+            "status": "Payment Received",
+            "qty": 1,
+            "price": "137.40",
+            "vat": "22.90",
+            "vat_percentage": 20,
+            "each_price_ex_vat": 114.5,
+            "each_price_vat": 22.900000000000006,
+            "each_price_discount_ex_vat": "0.00",
+            "each_price_discount_vat": 0,
+            "weight": 0
+        },
+        {
+            "id": 19991,
+            "line_rel_id": 0,
+            "line_type": "PRODUCT",
+            "line_desc": "Tubby Tom's The Squealer Hot Sauce 150g - Sauce-997706",
+            "rel_data": {
+                "product": {
+                    "href": "\/products\/58662.json",
+                    "id": 58662,
+                    "name": "Tubby Tom's The Squealer Hot Sauce 150g",
+                    "code": "Sauce-997706"
+                }
+            },
+            "status": "Payment Received",
+            "qty": 2,
+            "price": "16.80",
+            "vat": "2.80",
+            "vat_percentage": 20,
+            "each_price_ex_vat": 7,
+            "each_price_vat": 1.4000000000000004,
+            "each_price_discount_ex_vat": "0.00",
+            "each_price_discount_vat": 0,
+            "weight": 0
+        },
+        {
+            "id": 19992,
+            "line_rel_id": 0,
+            "line_type": "DELIVERY",
+            "line_desc": "Standard",
+            "rel_data": {
+                "delivery": {
+                    "href": "\/delivery-methods\/1.json",
+                    "id": 1,
+                    "name": "Standard"
+                }
+            },
+            "status": "Payment Received",
+            "qty": 1,
+            "price": "0.00",
+            "vat": "0.00",
+            "vat_percentage": 20,
+            "each_price_ex_vat": 0,
+            "each_price_vat": 0,
+            "each_price_discount_ex_vat": 0,
+            "each_price_discount_vat": 0,
+            "weight": 0
+        },
+        {
+            "id": 19995,
+            "line_rel_id": 0,
+            "line_type": "COUPON",
+            "line_desc": "Gift Voucher for &pound;400.00 - C46K13i8",
+            "rel_data": {
+                "coupon": {
+                    "href": "\/coupons\/72.json",
+                    "id": 72,
+                    "name": "Gift Voucher for &pound;400.00",
+                    "code": "C46K13i8"
+                }
+            },
+            "status": "Payment Received",
+            "qty": 1,
+            "price": "-154.20",
+            "vat": "0.00",
+            "vat_percentage": 0,
+            "each_price_ex_vat": -154.2,
+            "each_price_vat": 0,
+            "each_price_discount_ex_vat": 0,
+            "each_price_discount_vat": 0,
+            "weight": 0
+        }
+    ],
+    "is_free_delivery": false,
+    "customers_order_id": "",
+    "fob": "",
+    "required_by_date": "",
+    "purchase_order_number": "",
+    "delivery_note": ""
+}</code></pre>
+
+            </section>
+
+            <section class="doc-section">
+                <header>
+                    <h2 id="resources">Resources</h2>
+                </header>
+
+                <p>Here's a list of the API resources available under <code>/api/v1...</code>:</p>
+
+                <div class="endpoint">
+                    <h3>Products:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/products</code> - List / filter collection of products (this can
+                            be filtered by the “category”, "status" and “q” url params)</li>
+                        <li><span class="http-method">GET</span> <code>/products/:id</code> - Retrieve data on a specific product</li>
+                        <li><span class="http-method">POST</span> <code>/products</code> - Batch insert or update products</li>
+                        <li><span class="http-method">POST</span> <code>/products/:id</code> - Update a specific product</li>
+                        <li><span class="http-method">DELETE</span> <code>/products</code> - Batch delete products</li>
+                        <li><span class="http-method">DELETE</span> <code>/products/:id</code> - Delete a specific product</li>
+                        <li><span class="http-method">GET</span> <code>/products/filter/size,med/color,red,blue</code> - Filter products
+                            returned with filter params</li>
+                        <li>(These all also support the following "identifier" url params: id, code, name,
+                            e.g. <code>/products/:code?identifier=code</code>)</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Options:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/options</code> - List / filter collection of options</li>
+                        <li><span class="http-method">GET</span> <code>/options/:id</code> - Retrieve data on a specific option</li>
+                        <li><span class="http-method">POST</span> <code>/options</code> - Batch insert or update options</li>
+                        <li><span class="http-method">POST</span> <code>/options/:id</code> - Update a specific option</li>
+                        <li><span class="http-method">DELETE</span> <code>/options</code> - Batch delete options</li>
+                        <li><span class="http-method">DELETE</span> <code>/options/:id</code> - Delete a specific option</li>
+                        <li>(These all also support the following "identifier" url params: id, code, name)</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Product Filter Blocks:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/product-filter-blocks</code> - List collection of
+                            product-filter-blocks</li>
+                        <li><span class="http-method">GET</span> <code>/product-filter-blocks/:id</code> - Retrieve data on a specific
+                            product-filter-blocks</li>
+                        <li><span class="http-method">GET</span> <code>/products/filter/size,med/color,red,blue</code> - Filter the
+                            blocks returned with filter params</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Gallery:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/gallery</code> - List of gallery images</li>
+                        <li><span class="http-method">GET</span> <code>/gallery/:id</code> - Retrieve data on a specific gallery image
+                            (such as date added, comment/description etc.)</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Blog Posts:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/blog-posts</code> - List of blog posts</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Downloads:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/downloads</code> - List collection of downloads</li>
+                        <li><span class="http-method">GET</span> <code>/downloads/:id</code> - Retrieve data on a specific download</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Download categories:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/download-categories</code> - List collection of downloads
+                            categories</li>
+                        <li><span class="http-method">GET</span> <code>/download-categories/:id</code> - Retrieve data on a specific
+                            download category</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Categories:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/categories</code> - List collection of categories</li>
+                        <li><span class="http-method">GET</span> <code>/categories/:id</code> - Retrieve data on a specific category
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Users:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/users</code> - List collection of users</li>
+                        <li><span class="http-method">GET</span> <code>/users/:id</code> - Retrieve data on a specific user</li>
+                        <li><span class="http-method">POST</span> <code>/users</code> - Batch insert or update users</li>
+                        <li><span class="http-method">POST</span> <code>/users/:id</code> - Update a specific user</li>
+                        <li>(These all also support the following "identifier" url params: id, membership_code, email)</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>User Groups:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/user-groups</code> - List collection of user groups</li>
+                        <li><span class="http-method">GET</span> <code>/user-groups/:id</code> - Retrieve data on a specific user group
+                        </li>
+                        <li>(These all also support the following "identifier" url params: id, name)</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Regions:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/regions</code> - List collection of categories</li>
+                        <li><span class="http-method">GET</span> <code>/regions/:id</code> - Retrieve data on a specific category</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>VAT Types:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/vat-types</code> - List collection of vat types</li>
+                        <li><span class="http-method">GET</span> <code>/vat-types/:id</code> - Retrieve specific vat type</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Manufacturers:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/manufacturers</code> - List collection of manufacturers</li>
+                        <li><span class="http-method">GET</span> <code>/manufacturers/:id</code> - Retrieve specific manufacturer</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Departments:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/departments</code> - List collection of departments</li>
+                        <li><span class="http-method">GET</span> <code>/departments/:id</code> - Retrieve specific department</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Orders:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/orders</code> - List collection of orders</li>
+                        <li><span class="http-method">GET</span> <code>/orders/:id</code> - Retrieve data on a specific order</li>
+                        <li><span class="http-method">POST</span> <code>/orders</code> - Batch update orders</li>
+                        <li><span class="http-method">POST</span> <code>/orders/:id</code> - Update a specific order</li>
+                        <li>(These all also support the following "identifier" url params: id, invoice_id)</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Delivery Methods:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/delivery-methods</code> - List collection of delivery methods
+                        </li>
+                        <li><span class="http-method">GET</span> <code>/delivery-methods/:id</code> - Retrieve a specific delivery
+                            method</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Payment Methods:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/payment-methods</code> - List collection of payment methods</li>
+                        <li><span class="http-method">GET</span> <code>/payment-methods/:id</code> - Retrieve a specific payment method
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Coupons:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/coupons</code> - List collection of coupons</li>
+                        <li><span class="http-method">GET</span> <code>/coupons/:id</code> - Retrieve a specific coupon</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Pages:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/pages</code> - List collection of pages</li>
+                        <li><span class="http-method">GET</span> <code>/pages/:id</code> - Retrieve a specific page</li>
+                        <li>(These all also support the following "identifier" url params: id, slug)</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Sliders:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/sliders</code> - List collection of sliders</li>
+                        <li><span class="http-method">GET</span> <code>/sliders/:id</code> - Retrieve a specific slider</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Newsletters:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/newsletters</code> - List collection of newsletters</li>
+                        <li><span class="http-method">GET</span> <code>/newsletters/:id</code> - Retrieve a specific newsletter</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Testimonials:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/testimonials</code> - List collection of testimonials</li>
+                        <li><span class="http-method">GET</span> <code>/testimonials/:id</code> - Retrieve a specific testimonial</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Product Reviews:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/product-reviews</code> - List collection of product reviews
+                            (this can be filtered by the “product_id”, "featured" and “score_over” url params)</li>
+                        <li><span class="http-method">GET</span> <code>/product-reviews/:id</code> - Retrieve a specific product review
+                        </li>
+                    </ul>
+                </div>
+
+                <p>All resources support "limit" and "offset" which case be used to page results, generally the default on lists is 25.</p>
+                <p>Also most resources should support the "fields=*" url param, which allows full data on each views to be pulled back instead of just the basic data. </p>
+
+            </section>
+
+            <section class="doc-section">
+                <header>
+                    <h2 id="api-webhooks">API Webhooks</h2>
+                </header>
+
+                <p>Webhooks react to events on the site and send to a specific endpoint. </p>
+
+                <p>This allows you to host your own endpoint and receive in our API objects on events such as <code>new.order</code>.</p>
+
+                <p>Webhooks send the same API objects as you’d get looking up that data from the API, e.g. <code>new.order</code> for order #123 would send you the JSON the same as you’d get if you were to request: <code>/api/v1/orders/123</code> via the API.</p>
+
+                <p>Set these up via Admin > API Webhooks</p>
+
+                <p>
+                    <img src="/images/api/api-webhooks.png" alt="API Webhooks view">
+                </p>
+            </section>
+
+            <section class="doc-section">
+                <header>
+                    <h2 id="api-explorer">API Explorer</h2>
+                </header>
+
+                <p>The API explorer allows you to see real API GET responses directly inside the admin of the site.</p>
+
+                <p>Rather than fake examples, you can preview the exact same response without writing a single line of code.</p>
+
+                <p>Check this out in Admin > API Explorer.</p>
+
+                <p>
+                    <img src="/images/api/api-explorer.png" alt="API Explorer view">
+                </p>
+
+                <p>Alongside the API Explorer is a new Event Simulator.</p>
+                <p>This allows you to send real API objects from the website to your webhooks using the ApiWebHooks Hook for any given event and base input object.</p>
+                <p>E.g. <code>{"product_id":XXX}</code> to send a <code>new.product</code> or <code>update.product</code> event.</p>
+
+                <p>
+                    <img src="/images/api/api-event-sim.png" alt="API Event Simulator view">
+                </p>
+            </section>
+
+            <section class="doc-section">
+                <header>
+                    <h2 id="further-reading">Further Reading</h2>
+                </header>
+
+                <p>This quick overview is meant to help get you started with the API.</p>
+
+                <p>We also have more <a href="https://reallyeasycart.freshdesk.com/support/solutions/folders/269622">detailed documentation available here</a>.</p>
+
+                <p>Also feel free to contact us via our <a href="https://reallyeasycart.freshdesk.com/support">support tickets here</a>.</p>
+
+                <p>Thanks for reading.</p>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/json.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</body>
+</html>

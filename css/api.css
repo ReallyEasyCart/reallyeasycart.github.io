@@ -1,0 +1,164 @@
+
+/* === Base === */
+body {
+	font: 16px/1.4 "Poppins", sans-serif;
+	background: #EEF0E9;
+}
+
+/* box sizing all the things - https://css-tricks.com/box-sizing/ */
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+img { max-width: 100%; }
+
+code:not([class]) {
+	display: inline-block;
+	padding: 1px 2px;
+	background-color: #FFF;
+}
+
+a {
+	color: #000;
+}
+
+/* === Layout === */
+
+.page-header {
+	background: #282c34;
+	color: #fff;
+}
+.page-header {
+	padding: 30px 60px;
+}
+.page-header h1 {
+	font-size: 48px;
+	margin: 0;
+	text-align: center;
+}
+.page-header span {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 24px;
+	font-weight: normal;
+}
+.page-header svg {
+	fill: #FFF;
+	margin: 0 15px;
+}
+
+.page-wrapper {
+	padding: 20px;
+}
+
+.page-sidebar {
+	text-align: center;
+	padding-bottom: 60px;
+}
+.page-sidebar ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.page-sidebar a {
+	padding: 10px 0;
+	display: inline-block;
+	color: #000;
+}
+.page-sidebar strong {
+	color: #282c34;
+}
+
+.page-main {
+	position: relative;
+	padding: 0 0 0 60px;
+}
+.page-main::before {
+	/* show as a horizontal line down under the section numbers */
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 10px;
+	width: 1px;
+	height: 100%;
+	background: #D9D9D9;
+	z-index: -1;
+}
+
+@media screen and (min-width: 600px) {
+	.page-wrapper {
+		display: flex;
+		gap: 30px;
+		padding: 60px;
+	}
+	.page-sidebar {
+		width: 25%;
+		max-width: 240px;
+	}
+	.page-header h1,
+	.page-sidebar {
+		text-align: left;
+	}
+	.page-main {
+		flex: 1;
+	}
+
+	/* highlight js doesn't seem to overflow correctly when inside flex container, have the text wrap instead */
+	.page-main code {
+		text-wrap: wrap;
+		word-break: break-word;
+	}
+}
+
+/* === Modules === */
+
+.doc-section {
+	margin: 0 0 60px;
+	position: relative;
+}
+
+.doc-section::before {
+	content: counter(section);
+	counter-increment: section;
+	/* center the counter text inside */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* position slightly to the left in a circle */
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	background: #282c34;
+	color: #FFF;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 50%;
+	left: -70px;
+}
+.page-main {
+	counter-reset: section;
+}
+
+.doc-section h2 {
+	font-size: 24px;
+	margin: 0 0 15px;
+	color: #282c34;
+}
+
+.http-method {
+	display: inline-block;
+	padding: 2px 6px;
+	background: #282c34;
+	color: #FFF;
+	margin-bottom: 2px;
+}
+
+.endpoint ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
