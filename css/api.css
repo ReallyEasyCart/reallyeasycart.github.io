@@ -19,6 +19,8 @@ code:not([class]) {
 	display: inline-block;
 	padding: 1px 2px;
 	background-color: #FFF;
+	overflow: auto;
+	max-width: 100%;
 }
 
 a {
