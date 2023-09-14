@@ -806,6 +806,11 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <ul>
                         <li data-http-method="GET"><code>/downloads</code> - List collection of downloads</li>
                         <li data-http-method="GET"><code>/downloads/:id</code> - Retrieve data on a specific download</li>
+                        <li data-http-method="POST"><code>/downloads</code> - Batch insert or update downloads</li>
+                        <li data-http-method="POST"><code>/downloads/:id</code> - Update a specific download</li>
+                        <li data-http-method="DELETE"><code>/downloads</code> - Batch delete downloads</li>
+                        <li data-http-method="DELETE"><code>/downloads/:id</code> - Delete a specific download</li>
+                        <li>(These all also support the following "identifier" url params: id, srchash - a sha1 of the initial location, if updated later the initial/previous srchash is maintained)</li>
                     </ul>
                 </div>
 
@@ -953,6 +958,10 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <ul>
                         <li data-http-method="GET"><code>/user-groups</code> - List collection of user groups</li>
                         <li data-http-method="GET"><code>/user-groups/:id</code> - Retrieve data on a specific user group</li>
+                        <li data-http-method="POST"><code>/user-groups</code> - Batch insert or update user groups</li>
+                        <li data-http-method="POST"><code>/user-groups/:id</code> - Update a specific user group</li>
+                        <li data-http-method="DELETE"><code>/user-groups</code> - Batch delete user groups</li>
+                        <li data-http-method="DELETE"><code>/user-groups/:id</code> - Delete a specific user group</li>
                         <li>(These all also support the following "identifier" url params: id, name)</li>
                     </ul>
                 </div>
