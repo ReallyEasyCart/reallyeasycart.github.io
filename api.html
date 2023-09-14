@@ -763,19 +763,81 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <p>Here's a list of the API resources available under <code>/api/v1...</code>:</p>
 
                 <div class="endpoint">
-                    <h3>Products:</h3>
+                    <h3>Blog Posts:</h3>
                     <ul>
-                        <li><span class="http-method">GET</span> <code>/products</code> - List / filter collection of products (this can
-                            be filtered by the “category”, "status" and “q” url params)</li>
-                        <li><span class="http-method">GET</span> <code>/products/:id</code> - Retrieve data on a specific product</li>
-                        <li><span class="http-method">POST</span> <code>/products</code> - Batch insert or update products</li>
-                        <li><span class="http-method">POST</span> <code>/products/:id</code> - Update a specific product</li>
-                        <li><span class="http-method">DELETE</span> <code>/products</code> - Batch delete products</li>
-                        <li><span class="http-method">DELETE</span> <code>/products/:id</code> - Delete a specific product</li>
-                        <li><span class="http-method">GET</span> <code>/products/filter/size,med/color,red,blue</code> - Filter products
-                            returned with filter params</li>
-                        <li>(These all also support the following "identifier" url params: id, code, name,
-                            e.g. <code>/products/:code?identifier=code</code>)</li>
+                        <li><span class="http-method">GET</span> <code>/blog-posts</code> - List of blog posts</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Categories:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/categories</code> - List collection of categories</li>
+                        <li><span class="http-method">GET</span> <code>/categories/:id</code> - Retrieve data on a specific category</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Coupons:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/coupons</code> - List collection of coupons</li>
+                        <li><span class="http-method">GET</span> <code>/coupons/:id</code> - Retrieve a specific coupon</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Delivery Methods:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/delivery-methods</code> - List collection of delivery methods</li>
+                        <li><span class="http-method">GET</span> <code>/delivery-methods/:id</code> - Retrieve a specific delivery method</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Departments:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/departments</code> - List collection of departments</li>
+                        <li><span class="http-method">GET</span> <code>/departments/:id</code> - Retrieve specific department</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Downloads:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/downloads</code> - List collection of downloads</li>
+                        <li><span class="http-method">GET</span> <code>/downloads/:id</code> - Retrieve data on a specific download</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Download categories:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/download-categories</code> - List collection of downloads categories</li>
+                        <li><span class="http-method">GET</span> <code>/download-categories/:id</code> - Retrieve data on a specific download category</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Gallery:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/gallery</code> - List of gallery images</li>
+                        <li><span class="http-method">GET</span> <code>/gallery/:id</code> - Retrieve data on a specific gallery image (such as date added, comment/description etc.)</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Manufacturers:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/manufacturers</code> - List collection of manufacturers</li>
+                        <li><span class="http-method">GET</span> <code>/manufacturers/:id</code> - Retrieve specific manufacturer</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Newsletters:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/newsletters</code> - List collection of newsletters</li>
+                        <li><span class="http-method">GET</span> <code>/newsletters/:id</code> - Retrieve a specific newsletter</li>
                     </ul>
                 </div>
                 
@@ -793,57 +855,94 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 </div>
                 
                 <div class="endpoint">
+                    <h3>Orders:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/orders</code> - List collection of orders</li>
+                        <li><span class="http-method">GET</span> <code>/orders/:id</code> - Retrieve data on a specific order</li>
+                        <li><span class="http-method">POST</span> <code>/orders</code> - Batch update orders</li>
+                        <li><span class="http-method">POST</span> <code>/orders/:id</code> - Update a specific order</li>
+                        <li>(These all also support the following "identifier" url params: id, invoice_id)</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Pages:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/pages</code> - List collection of pages</li>
+                        <li><span class="http-method">GET</span> <code>/pages/:id</code> - Retrieve a specific page</li>
+                        <li>(These all also support the following "identifier" url params: id, slug)</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Payment Methods:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/payment-methods</code> - List collection of payment methods</li>
+                        <li><span class="http-method">GET</span> <code>/payment-methods/:id</code> - Retrieve a specific payment method</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
                     <h3>Product Filter Blocks:</h3>
                     <ul>
-                        <li><span class="http-method">GET</span> <code>/product-filter-blocks</code> - List collection of
-                            product-filter-blocks</li>
-                        <li><span class="http-method">GET</span> <code>/product-filter-blocks/:id</code> - Retrieve data on a specific
-                            product-filter-blocks</li>
-                        <li><span class="http-method">GET</span> <code>/products/filter/size,med/color,red,blue</code> - Filter the
-                            blocks returned with filter params</li>
+                        <li><span class="http-method">GET</span> <code>/product-filter-blocks</code> - List collection of product-filter-blocks</li>
+                        <li><span class="http-method">GET</span> <code>/product-filter-blocks/:id</code> - Retrieve data on a specific product-filter-blocks</li>
+                        <li><span class="http-method">GET</span> <code>/products/filter/size,med/color,red,blue</code> - Filter the blocks returned with filter params</li>
                     </ul>
                 </div>
                 
                 <div class="endpoint">
-                    <h3>Gallery:</h3>
+                    <h3>Product Reviews:</h3>
                     <ul>
-                        <li><span class="http-method">GET</span> <code>/gallery</code> - List of gallery images</li>
-                        <li><span class="http-method">GET</span> <code>/gallery/:id</code> - Retrieve data on a specific gallery image
-                            (such as date added, comment/description etc.)</li>
+                        <li><span class="http-method">GET</span> <code>/product-reviews</code> - List collection of product reviews (this can be filtered by the “product_id”, "featured" and “score_over” url params)</li>
+                        <li><span class="http-method">GET</span> <code>/product-reviews/:id</code> - Retrieve a specific product review</li>
                     </ul>
                 </div>
                 
                 <div class="endpoint">
-                    <h3>Blog Posts:</h3>
+                    <h3>Products:</h3>
                     <ul>
-                        <li><span class="http-method">GET</span> <code>/blog-posts</code> - List of blog posts</li>
+                        <li><span class="http-method">GET</span> <code>/products</code> - List / filter collection of products (this can be filtered by the “category”, "status" and “q” url params)</li>
+                        <li><span class="http-method">GET</span> <code>/products/:id</code> - Retrieve data on a specific product</li>
+                        <li><span class="http-method">POST</span> <code>/products</code> - Batch insert or update products</li>
+                        <li><span class="http-method">POST</span> <code>/products/:id</code> - Update a specific product</li>
+                        <li><span class="http-method">DELETE</span> <code>/products</code> - Batch delete products</li>
+                        <li><span class="http-method">DELETE</span> <code>/products/:id</code> - Delete a specific product</li>
+                        <li><span class="http-method">GET</span> <code>/products/filter/size,med/color,red,blue</code> - Filter products returned with filter params</li>
+                        <li>(These all also support the following "identifier" url params: id, code, name, e.g. <code>/products/:code?identifier=code</code>)</li>
                     </ul>
                 </div>
                 
                 <div class="endpoint">
-                    <h3>Downloads:</h3>
+                    <h3>Regions:</h3>
                     <ul>
-                        <li><span class="http-method">GET</span> <code>/downloads</code> - List collection of downloads</li>
-                        <li><span class="http-method">GET</span> <code>/downloads/:id</code> - Retrieve data on a specific download</li>
+                        <li><span class="http-method">GET</span> <code>/regions</code> - List collection of categories</li>
+                        <li><span class="http-method">GET</span> <code>/regions/:id</code> - Retrieve data on a specific category</li>
                     </ul>
                 </div>
                 
                 <div class="endpoint">
-                    <h3>Download categories:</h3>
+                    <h3>Sliders:</h3>
                     <ul>
-                        <li><span class="http-method">GET</span> <code>/download-categories</code> - List collection of downloads
-                            categories</li>
-                        <li><span class="http-method">GET</span> <code>/download-categories/:id</code> - Retrieve data on a specific
-                            download category</li>
+                        <li><span class="http-method">GET</span> <code>/sliders</code> - List collection of sliders</li>
+                        <li><span class="http-method">GET</span> <code>/sliders/:id</code> - Retrieve a specific slider</li>
                     </ul>
                 </div>
                 
                 <div class="endpoint">
-                    <h3>Categories:</h3>
+                    <h3>Testimonials:</h3>
                     <ul>
-                        <li><span class="http-method">GET</span> <code>/categories</code> - List collection of categories</li>
-                        <li><span class="http-method">GET</span> <code>/categories/:id</code> - Retrieve data on a specific category
-                        </li>
+                        <li><span class="http-method">GET</span> <code>/testimonials</code> - List collection of testimonials</li>
+                        <li><span class="http-method">GET</span> <code>/testimonials/:id</code> - Retrieve a specific testimonial</li>
+                    </ul>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>User Groups:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/user-groups</code> - List collection of user groups</li>
+                        <li><span class="http-method">GET</span> <code>/user-groups/:id</code> - Retrieve data on a specific user group</li>
+                        <li>(These all also support the following "identifier" url params: id, name)</li>
                     </ul>
                 </div>
                 
@@ -859,125 +958,10 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 </div>
                 
                 <div class="endpoint">
-                    <h3>User Groups:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/user-groups</code> - List collection of user groups</li>
-                        <li><span class="http-method">GET</span> <code>/user-groups/:id</code> - Retrieve data on a specific user group
-                        </li>
-                        <li>(These all also support the following "identifier" url params: id, name)</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Regions:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/regions</code> - List collection of categories</li>
-                        <li><span class="http-method">GET</span> <code>/regions/:id</code> - Retrieve data on a specific category</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
                     <h3>VAT Types:</h3>
                     <ul>
                         <li><span class="http-method">GET</span> <code>/vat-types</code> - List collection of vat types</li>
                         <li><span class="http-method">GET</span> <code>/vat-types/:id</code> - Retrieve specific vat type</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Manufacturers:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/manufacturers</code> - List collection of manufacturers</li>
-                        <li><span class="http-method">GET</span> <code>/manufacturers/:id</code> - Retrieve specific manufacturer</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Departments:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/departments</code> - List collection of departments</li>
-                        <li><span class="http-method">GET</span> <code>/departments/:id</code> - Retrieve specific department</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Orders:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/orders</code> - List collection of orders</li>
-                        <li><span class="http-method">GET</span> <code>/orders/:id</code> - Retrieve data on a specific order</li>
-                        <li><span class="http-method">POST</span> <code>/orders</code> - Batch update orders</li>
-                        <li><span class="http-method">POST</span> <code>/orders/:id</code> - Update a specific order</li>
-                        <li>(These all also support the following "identifier" url params: id, invoice_id)</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Delivery Methods:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/delivery-methods</code> - List collection of delivery methods
-                        </li>
-                        <li><span class="http-method">GET</span> <code>/delivery-methods/:id</code> - Retrieve a specific delivery
-                            method</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Payment Methods:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/payment-methods</code> - List collection of payment methods</li>
-                        <li><span class="http-method">GET</span> <code>/payment-methods/:id</code> - Retrieve a specific payment method
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Coupons:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/coupons</code> - List collection of coupons</li>
-                        <li><span class="http-method">GET</span> <code>/coupons/:id</code> - Retrieve a specific coupon</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Pages:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/pages</code> - List collection of pages</li>
-                        <li><span class="http-method">GET</span> <code>/pages/:id</code> - Retrieve a specific page</li>
-                        <li>(These all also support the following "identifier" url params: id, slug)</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Sliders:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/sliders</code> - List collection of sliders</li>
-                        <li><span class="http-method">GET</span> <code>/sliders/:id</code> - Retrieve a specific slider</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Newsletters:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/newsletters</code> - List collection of newsletters</li>
-                        <li><span class="http-method">GET</span> <code>/newsletters/:id</code> - Retrieve a specific newsletter</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Testimonials:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/testimonials</code> - List collection of testimonials</li>
-                        <li><span class="http-method">GET</span> <code>/testimonials/:id</code> - Retrieve a specific testimonial</li>
-                    </ul>
-                </div>
-                
-                <div class="endpoint">
-                    <h3>Product Reviews:</h3>
-                    <ul>
-                        <li><span class="http-method">GET</span> <code>/product-reviews</code> - List collection of product reviews
-                            (this can be filtered by the “product_id”, "featured" and “score_over” url params)</li>
-                        <li><span class="http-method">GET</span> <code>/product-reviews/:id</code> - Retrieve a specific product review
-                        </li>
                     </ul>
                 </div>
 
