@@ -930,6 +930,17 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 </div>
                 
                 <div class="endpoint">
+                    <h3>Stock:</h3>
+                    <ul>
+                        <li><span class="http-method">GET</span> <code>/stock</code> - List stock with code, stock qty & costs</li>
+                        <li><span class="http-method">GET</span> <code>/stock/:id</code> - Retrieve a code's stock</li>
+                        <li><span class="http-method">POST</span> <code>/stock</code> - Batch update stock</li>
+                        <li><span class="http-method">POST</span> <code>/stock/:id</code> - Update a specific code's stock</li>
+                        <li>(The difference to the products resouce is this a simpler endpoint that also supports variation codes and stock.)</li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
                     <h3>Testimonials:</h3>
                     <ul>
                         <li><span class="http-method">GET</span> <code>/testimonials</code> - List collection of testimonials</li>
@@ -946,6 +957,17 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
                 
+                <div class="endpoint">
+                    <h3>Userfiles:</h3>
+                    <ul>
+                        <li><span class="http-method">POST</span> <code>/userfiles</code> - Create or Update files to store such as product or category images. 
+                            <br>This is an alternative to using FTP for managing files. 
+                            <br>Single file/image at a time supported passing an object containing a "filename" (e.g. "/userfiles/images/sys/x/y/z.png") and "body" (e.g. "data:image/png;base64,..."). 
+                            <br>FTP support is also available for sites & API integrations directly to the userfiles directory.</li>
+                        <li><span class="http-method">DELETE</span> <code>/userfiles</code> - Delete a specific file, pass an object with the filename inside.</li>
+                    </ul>
+                </div>
+
                 <div class="endpoint">
                     <h3>Users:</h3>
                     <ul>
