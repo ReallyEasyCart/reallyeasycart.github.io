@@ -128,16 +128,16 @@
                 <p><strong>Curl:</strong></p>
 
                 <pre><code class="language-bash hljs"># Lookup all products
-curl "https://{DOMAIN}/api/v1/products" --user {API_USER}:{API_PASS} 
+curl "https://{DOMAIN}/api/v1/products" --user {API_USER}:{API_PASS}
 
 # Lookup specific product by code
-curl "https://{DOMAIN}/api/v1/products/test?identifier=code" --user {API_USER}:{API_PASS} 
+curl "https://{DOMAIN}/api/v1/products/test?identifier=code" --user {API_USER}:{API_PASS}
 
 # Update specific product by code
 curl -X POST -d @data.json "https://{DOMAIN}/api/v1/products/test?identifier=code" --user {API_USER}:{API_PASS}
 
 # Batch update products
-curl -X POST -d @data.json "https://{DOMAIN}/api/v1/products" --user {API_USER}:{API_PASS} 
+curl -X POST -d @data.json "https://{DOMAIN}/api/v1/products" --user {API_USER}:{API_PASS}
 </code></pre>
 
                 <p><strong>PHP:</strong></p>
@@ -217,7 +217,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
     'test2',
 ]));
 </code></pre>
-                
+
             </section>
 
             <section class="doc-section">
@@ -298,13 +298,13 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
         "special_offer": "0.00"
     },
     "additional_images": [
-        
+
     ],
     "short_desc": "",
     "desc": "&lt;p>&nbsp;&lt;\/p&gt;\n\n&lt;p&gt;&lt;strong&gt;Why we love it:&lt;\/strong&gt;&lt;\/p&gt;\n\n&lt;p&gt;Features peppery heat that&rsquo;s awesome with wings or pulled pork, and its thinner consistency makes it a great choice for marinating, too.&lt;\/p&gt;\n\n&lt;p&gt;Spicy, peppery sauce with that works as marinade or sauce&lt;\/p&gt;\n\n&lt;p&gt;Great on everything from chicken and pork to beef&lt;\/p&gt;\n\n&lt;p&gt;&lt;br \/&gt;\n&lt;strong&gt;What you need to know:&lt;\/strong&gt;&lt;\/p&gt;\n\n&lt;p&gt;1 x Traeger Texas Spicy BBQ Sauce 16oz&lt;\/p&gt;\n\n&lt;p&gt;Size: 16oz \/ 473ml&lt;\/p&gt;\n",
     "tax_class": 1,
     "additional_prices": [
-        
+
     ],
     "categories": {
         "default": {
@@ -326,7 +326,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
     },
     "delivery": {
         "costs_to_zones": [
-            
+
         ],
         "free_delivery": 0,
         "free_delivery_zone": 0
@@ -349,7 +349,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
     "model_3d_image_path_ios": "",
     "download": null,
     "additional_downloads": [
-        
+
     ],
     "options": [
         {
@@ -367,10 +367,10 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
             "cost": "",
             "sync_key": "RGe0x2",
             "group_prices": {
-                
+
             },
             "group_special_prices": {
-                
+
             }
         },
         {
@@ -388,10 +388,10 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
             "cost": "",
             "sync_key": "Rr09B2",
             "group_prices": {
-                
+
             },
             "group_special_prices": {
-                
+
             }
         },
         {
@@ -409,20 +409,20 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
             "cost": "",
             "sync_key": "E49NjR",
             "group_prices": {
-                
+
             },
             "group_special_prices": {
-                
+
             }
         }
     ],
     "attributes": [
-        
+
     ],
     "weight": "",
     "youtube_clip": "",
     "videos": [
-        
+
     ],
     "cost_price": "",
     "is_digital": false,
@@ -452,38 +452,38 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
     "packaging_type_id": 1,
     "tags": {
         "Design": [
-            
+
         ],
         "Warnings": [
-            
+
         ],
         "Colours": [
-            
+
         ],
         "Season": [
-            
+
         ],
         "Product Ranges": [
-            
+
         ],
         "No products match this group": [
-            
+
         ],
         "Forge Example": [
-            
+
         ]
     },
     "associations": [
-        
+
     ],
     "alternatives": [
-        
+
     ],
     "addons": [
-        
+
     ],
     "components": [
-        
+
     ],
     "variations": [
         {
@@ -768,7 +768,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/blog-posts</code> - List of blog posts</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Categories:</h3>
                     <ul>
@@ -776,7 +776,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/categories/:id</code> - Retrieve data on a specific category</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Coupons:</h3>
                     <ul>
@@ -784,7 +784,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/coupons/:id</code> - Retrieve a specific coupon</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Delivery Methods:</h3>
                     <ul>
@@ -792,7 +792,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/delivery-methods/:id</code> - Retrieve a specific delivery method</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Departments:</h3>
                     <ul>
@@ -800,7 +800,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/departments/:id</code> - Retrieve specific department</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Downloads:</h3>
                     <ul>
@@ -808,7 +808,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/downloads/:id</code> - Retrieve data on a specific download</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Download categories:</h3>
                     <ul>
@@ -816,7 +816,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/download-categories/:id</code> - Retrieve data on a specific download category</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Gallery:</h3>
                     <ul>
@@ -824,7 +824,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/gallery/:id</code> - Retrieve data on a specific gallery image (such as date added, comment/description etc.)</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Manufacturers:</h3>
                     <ul>
@@ -832,7 +832,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/manufacturers/:id</code> - Retrieve specific manufacturer</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Newsletters:</h3>
                     <ul>
@@ -840,7 +840,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/newsletters/:id</code> - Retrieve a specific newsletter</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Options:</h3>
                     <ul>
@@ -853,7 +853,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li>(These all also support the following "identifier" url params: id, code, name)</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Orders:</h3>
                     <ul>
@@ -864,7 +864,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li>(These all also support the following "identifier" url params: id, invoice_id)</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Pages:</h3>
                     <ul>
@@ -873,7 +873,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li>(These all also support the following "identifier" url params: id, slug)</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Payment Methods:</h3>
                     <ul>
@@ -881,7 +881,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/payment-methods/:id</code> - Retrieve a specific payment method</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Product Filter Blocks:</h3>
                     <ul>
@@ -890,7 +890,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/products/filter/size,med/color,red,blue</code> - Filter the blocks returned with filter params</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Product Reviews:</h3>
                     <ul>
@@ -898,7 +898,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/product-reviews/:id</code> - Retrieve a specific product review</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Products:</h3>
                     <ul>
@@ -912,7 +912,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li>(These all also support the following "identifier" url params: id, code, name, e.g. <code>/products/:code?identifier=code</code>)</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Regions:</h3>
                     <ul>
@@ -920,7 +920,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/regions/:id</code> - Retrieve data on a specific category</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Sliders:</h3>
                     <ul>
@@ -928,7 +928,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/sliders/:id</code> - Retrieve a specific slider</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Stock:</h3>
                     <ul>
@@ -947,7 +947,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li><span class="http-method">GET</span> <code>/testimonials/:id</code> - Retrieve a specific testimonial</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>User Groups:</h3>
                     <ul>
@@ -956,13 +956,13 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li>(These all also support the following "identifier" url params: id, name)</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>Userfiles:</h3>
                     <ul>
-                        <li><span class="http-method">POST</span> <code>/userfiles</code> - Create or Update files to store such as product or category images. 
-                            <br>This is an alternative to using FTP for managing files. 
-                            <br>Single file/image at a time supported passing an object containing a "filename" (e.g. "/userfiles/images/sys/x/y/z.png") and "body" (e.g. "data:image/png;base64,..."). 
+                        <li><span class="http-method">POST</span> <code>/userfiles</code> - Create or Update files to store such as product or category images.
+                            <br>This is an alternative to using FTP for managing files.
+                            <br>Single file/image at a time supported passing an object containing a "filename" (e.g. "/userfiles/images/sys/x/y/z.png") and "body" (e.g. "data:image/png;base64,...").
                             <br>FTP support is also available for sites & API integrations directly to the userfiles directory.</li>
                         <li><span class="http-method">DELETE</span> <code>/userfiles</code> - Delete a specific file, pass an object with the filename inside.</li>
                     </ul>
@@ -978,7 +978,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li>(These all also support the following "identifier" url params: id, membership_code, email)</li>
                     </ul>
                 </div>
-                
+
                 <div class="endpoint">
                     <h3>VAT Types:</h3>
                     <ul>
