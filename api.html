@@ -202,7 +202,7 @@ $products = REC::api('POST', '/products?identifier=code', [
             'name' => 'Test Product',
         ],
         [
-            'code' => 'test2', // or this will insert if code not found
+            'code' => 'test2', // or this will insert/create if code not found
             'name' => 'Test Product 2',
         ],
     ],
@@ -806,11 +806,11 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <ul>
                         <li data-http-method="GET"><code>/downloads</code> - List collection of downloads</li>
                         <li data-http-method="GET"><code>/downloads/:id</code> - Retrieve data on a specific download</li>
-                        <li data-http-method="POST"><code>/downloads</code> - Batch insert or update downloads</li>
+                        <li data-http-method="POST"><code>/downloads</code> - Batch create or update downloads <small>[required fields: name, src]</small></li>
                         <li data-http-method="POST"><code>/downloads/:id</code> - Update a specific download</li>
                         <li data-http-method="DELETE"><code>/downloads</code> - Batch delete downloads</li>
                         <li data-http-method="DELETE"><code>/downloads/:id</code> - Delete a specific download</li>
-                        <li>(These all also support the following "identifier" url params: id, srchash - a sha1 of the initial location, if updated later the initial/previous srchash is maintained)</li>
+                        <li>These all also support the following "identifier" url params: id, srchash - a sha1 of the initial location, if updated later the initial/previous srchash is maintained</li>
                     </ul>
                 </div>
 
@@ -851,11 +851,12 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <ul>
                         <li data-http-method="GET"><code>/options</code> - List / filter collection of options</li>
                         <li data-http-method="GET"><code>/options/:id</code> - Retrieve data on a specific option</li>
-                        <li data-http-method="POST"><code>/options</code> - Batch insert or update options</li>
+                        <li data-http-method="POST"><code>/options</code> - Batch create or update options <small>[required fields: product_id, group (e.g. Size), desc (e.g. Medium)]</small></li>
                         <li data-http-method="POST"><code>/options/:id</code> - Update a specific option</li>
                         <li data-http-method="DELETE"><code>/options</code> - Batch delete options</li>
                         <li data-http-method="DELETE"><code>/options/:id</code> - Delete a specific option</li>
-                        <li>(These all also support the following "identifier" url params: id, code, name)</li>
+                        <li>These all also support the following "identifier" url params: id, code, name</li>
+                        <li>You can also manage options directly on their products.</li>
                     </ul>
                 </div>
 
@@ -864,9 +865,10 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <ul>
                         <li data-http-method="GET"><code>/orders</code> - List collection of orders</li>
                         <li data-http-method="GET"><code>/orders/:id</code> - Retrieve data on a specific order</li>
-                        <li data-http-method="POST"><code>/orders</code> - Batch update orders</li>
+                        <li data-http-method="POST"><code>/orders</code> - Batch update orders
+                            <br><small>[required fields: status (see Admin > Order Statuses)] [updatable fields: customers_order_id, fob, purchase_order_number, required_by_date, status, delivery_note]</small></li>
                         <li data-http-method="POST"><code>/orders/:id</code> - Update a specific order</li>
-                        <li>(These all also support the following "identifier" url params: id, invoice_id)</li>
+                        <li>These all also support the following "identifier" url params: id, invoice_id</li>
                     </ul>
                 </div>
 
@@ -875,7 +877,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <ul>
                         <li data-http-method="GET"><code>/pages</code> - List collection of pages</li>
                         <li data-http-method="GET"><code>/pages/:id</code> - Retrieve a specific page</li>
-                        <li>(These all also support the following "identifier" url params: id, slug)</li>
+                        <li>These all also support the following "identifier" url params: id, slug</li>
                     </ul>
                 </div>
 
@@ -909,12 +911,13 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <ul>
                         <li data-http-method="GET"><code>/products</code> - List / filter collection of products (this can be filtered by the “category”, "status" and “q” url params)</li>
                         <li data-http-method="GET"><code>/products/:id</code> - Retrieve data on a specific product</li>
-                        <li data-http-method="POST"><code>/products</code> - Batch insert or update products</li>
+                        <li data-http-method="POST"><code>/products</code> - Batch create or update products
+                            <br><small>[required fields: name] [suggested fields: code, desc, price, image, status (draft, live, featured, special_offer, upcoming, deleted]</small></li>
                         <li data-http-method="POST"><code>/products/:id</code> - Update a specific product</li>
                         <li data-http-method="DELETE"><code>/products</code> - Batch delete products</li>
                         <li data-http-method="DELETE"><code>/products/:id</code> - Delete a specific product</li>
                         <li data-http-method="GET"><code>/products/filter/size,med/color,red,blue</code> - Filter products returned with filter params</li>
-                        <li>(These all also support the following "identifier" url params: id, code, name, e.g. <code>/products/:code?identifier=code</code>)</li>
+                        <li>These all also support the following "identifier" url params: id, code, name, e.g. <code>/products/:code?identifier=code</code></li>
                     </ul>
                 </div>
 
@@ -939,9 +942,9 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <ul>
                         <li data-http-method="GET"><code>/stock</code> - List stock with code, stock qty & costs</li>
                         <li data-http-method="GET"><code>/stock/:id</code> - Retrieve a code's stock</li>
-                        <li data-http-method="POST"><code>/stock</code> - Batch update stock</li>
+                        <li data-http-method="POST"><code>/stock</code> - Batch update stock <small>[required fields: code, stock]</small></li>
                         <li data-http-method="POST"><code>/stock/:id</code> - Update a specific code's stock</li>
-                        <li>(The difference to the products resouce is this a simpler endpoint that also supports variation codes and stock.)</li>
+                        <li>The difference to the products resouce is this a simpler endpoint that also supports variation codes and stock.</li>
                     </ul>
                 </div>
 
@@ -958,22 +961,23 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <ul>
                         <li data-http-method="GET"><code>/user-groups</code> - List collection of user groups</li>
                         <li data-http-method="GET"><code>/user-groups/:id</code> - Retrieve data on a specific user group</li>
-                        <li data-http-method="POST"><code>/user-groups</code> - Batch insert or update user groups</li>
+                        <li data-http-method="POST"><code>/user-groups</code> - Batch create or update user groups <small>[required fields: name]</small></li>
                         <li data-http-method="POST"><code>/user-groups/:id</code> - Update a specific user group</li>
                         <li data-http-method="DELETE"><code>/user-groups</code> - Batch delete user groups</li>
                         <li data-http-method="DELETE"><code>/user-groups/:id</code> - Delete a specific user group</li>
-                        <li>(These all also support the following "identifier" url params: id, name)</li>
+                        <li>These all also support the following "identifier" url params: id, name</li>
                     </ul>
                 </div>
 
                 <div class="endpoint">
                     <h3>Userfiles:</h3>
                     <ul>
-                        <li data-http-method="POST"><code>/userfiles</code> - Create or Update files to store such as product or category images.
-                            <br>This is an alternative to using FTP for managing files.
-                            <br>Single file/image at a time supported passing an object containing a "filename" (e.g. "/userfiles/images/sys/x/y/z.png") and "body" (e.g. "data:image/png;base64,...").
-                            <br>FTP support is also available for sites & API integrations directly to the userfiles directory.</li>
+                        <li data-http-method="POST"><code>/userfiles</code> - Create or update files to store such as product or category images.
+                            <br><small>[required fields: "filename" (e.g. "/userfiles/images/sys/x/y/z.png") and "body" (e.g. "data:image/png;base64,...")]</small>
+                        </li>
                         <li data-http-method="DELETE"><code>/userfiles</code> - Delete a specific file, pass an object with the filename inside.</li>
+                        <li>This is an alternative to using FTP, supports managing a single file/image at a time.
+                            <br>FTP support is also available for sites & API integrations directly to the userfiles directory.</li>
                     </ul>
                 </div>
 
@@ -982,9 +986,9 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <ul>
                         <li data-http-method="GET"><code>/users</code> - List collection of users</li>
                         <li data-http-method="GET"><code>/users/:id</code> - Retrieve data on a specific user</li>
-                        <li data-http-method="POST"><code>/users</code> - Batch insert or update users</li>
+                        <li data-http-method="POST"><code>/users</code> - Batch create or update users <small>[required fields: full_name, email]</small></li>
                         <li data-http-method="POST"><code>/users/:id</code> - Update a specific user</li>
-                        <li>(These all also support the following "identifier" url params: id, membership_code, email)</li>
+                        <li>These all also support the following "identifier" url params: id, membership_code, email</li>
                     </ul>
                 </div>
 
