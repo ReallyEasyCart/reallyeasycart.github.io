@@ -158,12 +158,23 @@ a {
 	color: #282c34;
 }
 
-.http-method {
+[data-http-method]::before {
+	content: attr(data-http-method);
 	display: inline-block;
 	padding: 2px 6px;
 	background: #282c34;
+	font-weight: bold;
 	color: #FFF;
 	margin-bottom: 2px;
+}
+[data-http-method="GET"]::before {
+	color: #4CAF50;
+}
+[data-http-method="POST"]::before {
+	color: #FF9800;
+}
+[data-http-method="DELETE"]::before {
+	color: #F44336;
 }
 
 .endpoint ul {
