@@ -912,7 +912,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li data-http-method="GET"><code>/products</code> - List / filter collection of products (this can be filtered by the “category”, "status" and “q” url params)</li>
                         <li data-http-method="GET"><code>/products/:id</code> - Retrieve data on a specific product</li>
                         <li data-http-method="POST"><code>/products</code> - Batch create or update products
-                            <br><small>[required fields: name] [suggested fields: code, desc, price, image, status (draft, live, featured, special_offer, upcoming, deleted]</small></li>
+                            <br><small>[required fields: name] [suggested fields: code, desc, price, image, status (draft, live, featured, special_offer, upcoming, deleted)]</small></li>
                         <li data-http-method="POST"><code>/products/:id</code> - Update a specific product</li>
                         <li data-http-method="DELETE"><code>/products</code> - Batch delete products</li>
                         <li data-http-method="DELETE"><code>/products/:id</code> - Delete a specific product</li>
