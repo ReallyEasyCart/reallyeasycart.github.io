@@ -765,14 +765,15 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Blog Posts:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/blog-posts</code> - List of blog posts</li>
+                        <li data-http-method="GET"><code>/blog-posts</code> - List of blog posts <small>[filters: category (filter blog posts by category id)]</small></li>
+                        <li data-http-method="GET"><code>/blog-posts/:id</code> - List of blog posts</li>
                     </ul>
                 </div>
 
                 <div class="endpoint">
                     <h3>Categories:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/categories</code> - List collection of categories</li>
+                        <li data-http-method="GET"><code>/categories</code> - List collection of categories <small>[filters: parent (filter by parent category id)]</small></li>
                         <li data-http-method="GET"><code>/categories/:id</code> - Retrieve data on a specific category</li>
                     </ul>
                 </div>
@@ -804,7 +805,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Downloads:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/downloads</code> - List collection of downloads</li>
+                        <li data-http-method="GET"><code>/downloads</code> - List collection of downloads <small>[filters: category (filter downloads by category id), ids (filter downloads by a comma separated list of ids)]</small></li>
                         <li data-http-method="GET"><code>/downloads/:id</code> - Retrieve data on a specific download</li>
                         <li data-http-method="POST"><code>/downloads</code> - Batch create or update downloads <small>[required fields: name, src]</small></li>
                         <li data-http-method="POST"><code>/downloads/:id</code> - Update a specific download</li>
@@ -825,8 +826,16 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Gallery:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/gallery</code> - List of gallery images</li>
-                        <li data-http-method="GET"><code>/gallery/:id</code> - Retrieve data on a specific gallery image (such as date added, comment/description etc.)</li>
+                        <li data-http-method="GET"><code>/gallery</code> - List of gallery images <small>[filters: album (filter gallery images by album id)]</small></li>
+                        <li data-http-method="GET"><code>/gallery/:id</code> - Retrieve data on a specific gallery image</li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Google Reviews:</h3>
+                    <ul>
+                        <li data-http-method="GET"><code>/google-reviews</code> - List of google reviews for the site <small>[filters: average (filter by minimum average rating)]</small></li>
+                        <li data-http-method="GET"><code>/google-reviews/:id</code> - Retrieve data on a specific review</li>
                     </ul>
                 </div>
 
@@ -849,7 +858,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Options:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/options</code> - List / filter collection of options</li>
+                        <li data-http-method="GET"><code>/options</code> - List collection of options</li>
                         <li data-http-method="GET"><code>/options/:id</code> - Retrieve data on a specific option</li>
                         <li data-http-method="POST"><code>/options</code> - Batch create or update options <small>[required fields: product_id, group (e.g. Size), desc (e.g. Medium)]</small></li>
                         <li data-http-method="POST"><code>/options/:id</code> - Update a specific option</li>
@@ -863,7 +872,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Orders:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/orders</code> - List collection of orders</li>
+                        <li data-http-method="GET"><code>/orders</code> - List collection of orders <small>[filters: since_timestamp (filter to orders placed since timestamp, e.g. ?since_timestamp=1591970309 or ?since_timestamp=2020-06-11T07:45:02 - both accepted)]</small></li>
                         <li data-http-method="GET"><code>/orders/:id</code> - Retrieve data on a specific order</li>
                         <li data-http-method="POST"><code>/orders</code> - Batch update orders
                             <br><small>[required fields: status (see Admin > Order Statuses)] [updatable fields: customers_order_id, fob, purchase_order_number, required_by_date, status, delivery_note]</small></li>
@@ -875,7 +884,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Pages:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/pages</code> - List collection of pages</li>
+                        <li data-http-method="GET"><code>/pages</code> - List collection of pages <small>[filters: parent (id of parent page)]</small></li>
                         <li data-http-method="GET"><code>/pages/:id</code> - Retrieve a specific page</li>
                         <li>These all also support the following "identifier" url params: id, slug</li>
                     </ul>
@@ -892,8 +901,8 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Product Filter Blocks:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/product-filter-blocks</code> - List collection of product-filter-blocks</li>
-                        <li data-http-method="GET"><code>/product-filter-blocks/:id</code> - Retrieve data on a specific product-filter-blocks</li>
+                        <li data-http-method="GET"><code>/product-filter-blocks</code> - List collection of product filter search blocks <small>[filters: remaining_only (filter to only show product filter blocks with remaining products)]</small></li>
+                        <li data-http-method="GET"><code>/product-filter-blocks/:id</code> - Retrieve data on a specific product filter search blocks</li>
                         <li data-http-method="GET"><code>/products/filter/size,med/color,red,blue</code> - Filter the blocks returned with filter params</li>
                     </ul>
                 </div>
@@ -901,7 +910,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Product Reviews:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/product-reviews</code> - List collection of product reviews (this can be filtered by the “product_id”, "featured" and “score_over” url params)</li>
+                        <li data-http-method="GET"><code>/product-reviews</code> - List collection of product reviews <small>[filters: product_id, featured, score_over, verified_purchase]</small></li>
                         <li data-http-method="GET"><code>/product-reviews/:id</code> - Retrieve a specific product review</li>
                     </ul>
                 </div>
@@ -909,7 +918,8 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Products:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/products</code> - List / filter collection of products (this can be filtered by the “category”, "status" and “q” url params)</li>
+                        <li data-http-method="GET"><code>/products</code> - List / filter collection of products
+                            <br><small>[filters: use_non_vat_prices=1 (use non-VAT prices), ids (comma separated ids), category (filter to products in a specific category id), status, tags, q (text search over: id, code, name, desc columns, restrict these fields with q_fields)]</small></li>
                         <li data-http-method="GET"><code>/products/:id</code> - Retrieve data on a specific product</li>
                         <li data-http-method="POST"><code>/products</code> - Batch create or update products
                             <br><small>[required fields: name] [suggested fields: code, desc, price, image, status (draft, live, featured, special_offer, upcoming, deleted)]</small></li>
@@ -940,7 +950,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Stock:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/stock</code> - List stock with code, stock qty & costs</li>
+                        <li data-http-method="GET"><code>/stock</code> - List stock with code, stock qty & costs <small>[filters: codes (filter stock by a comma separated list of codes)]</small></li>
                         <li data-http-method="GET"><code>/stock/:id</code> - Retrieve a code's stock</li>
                         <li data-http-method="POST"><code>/stock</code> - Batch update stock <small>[required fields: code, stock]</small></li>
                         <li data-http-method="POST"><code>/stock/:id</code> - Update a specific code's stock</li>
@@ -984,7 +994,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Users:</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/users</code> - List collection of users</li>
+                        <li data-http-method="GET"><code>/users</code> - List collection of users <small>[filters: use_non_vat_prices=1 (use non-VAT prices for per user delivery_charges)]</small></li>
                         <li data-http-method="GET"><code>/users/:id</code> - Retrieve data on a specific user</li>
                         <li data-http-method="POST"><code>/users</code> - Batch create or update users <small>[required fields: full_name, email]</small></li>
                         <li data-http-method="POST"><code>/users/:id</code> - Update a specific user</li>
@@ -1000,8 +1010,13 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <p>All resources support "limit" and "offset" which can be used to page through results, generally the default on lists is 25 and the max for the limit is generally 1000.</p>
-                <p>Also most collection resources should support the "fields=*" url param, which allows full data on each views to be pulled back instead of just the basic data. </p>
+                <br>
+
+                <p>All collection resources support <code>limit</code> and <code>offset</code> which can be used to page through results, generally the default on lists is 25 and the max for the limit is generally 1000. See examples in the <code>paging</code> property of collection responses.</p>
+                <p>Also most collection resources should support the <code>fields=*</code> url param, which allows full data on each views to be pulled back instead of just the basic data. </p>
+                <p>The following resources also allow a <code>diffOnly=true</code> url param to show only changes that would be made without applying them live: downloads, options, orders, products, stock, user groups, users.</p>
+                <p>For JSON responses, there's a <code>prettyPrint=true</code> param which can be useful as well as a <code>callback</code> param for front-end JSONP support if needed.</p>
+                <p>For POST updates, we recommend sending JSON as the request body. However if you'd prefer to use form-urlencoded params the you can send the JSON in a <code>packet</code> param.</p>
 
             </section>
 
