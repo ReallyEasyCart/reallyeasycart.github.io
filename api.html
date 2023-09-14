@@ -753,6 +753,12 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
     "delivery_note": ""
 }</code></pre>
 
+                <p>We use HTTP status codes for responses (such as 200 for success, 201 for created, 204 for updated, 4XX statuses for bad requests such as 404 not found, 400 for missing requirements etc). We recommend using these in your implementation, however if your API client cannot handle these, you can surpress them to all return as 200 with <code>suppress_response_codes=true</code>.</p>
+
+                <p>Date format: ISO 8601 - Complete date plus hours, minutes and seconds YYYY-MM-DDTHH:MM:SS <small>(Timezone is the site timezone, e.g. Europe/London)</small></p>
+
+                <p>Encoding for all responses: UTF-8</p>
+
             </section>
 
             <section class="doc-section">
