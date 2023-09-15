@@ -1032,7 +1032,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 </header>
 
                 <p>Webhooks react to events on the site and send to a specific endpoint.
-                    <br>This allows you to host your own endpoint and receive in our API objects on events such as <code>new.order</code>.</p>
+                    <br>This allows you to host your own endpoint and receive in our API objects on events such as <code>new.order</code>, <code>update.order</code>, <code>new.user</code>, <code>update.user</code>, <code>new.product</code>, <code>update.product</code>, <code>delete.product</code>, <code>batch-update.product</code>, <code>batch-delete.product</code> and many more available.</p>
 
                 <p>Webhooks send the same API objects as you’d get looking up that data from the API, e.g. <code>new.order</code> for order #123 would send you the JSON the same as you’d get if you were to request: <code>/api/v1/orders/123</code> via the API.</p>
 
