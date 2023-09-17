@@ -1087,11 +1087,13 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="GET">
                             <code class="request__url">/products/<strong>{id}</strong></code>
                             <span class="request__info">Retrieve data on a specific product</span>
+                            <span class="request__requirements">Sites using variations (option combinations of products) allow lookups by both product code and variation code using the code identifier. However updates and deletes are on top level products only. For variation level changes to prices use product options and variation stock/cost updates use the <code>/stock</code> resource.</small>
+                            </span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/products</code>
                             <span class="request__info">Batch create or update products</span>
-                            <span class="request__requirements">required fields: <code>products</code> - array of product objects</span>
+                            <span class="request__requirements">required fields: <code>products</code> - array of product objects, e.g. <code>{"products": [{...}, ...]}</code></span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/products/<strong>{id}</strong></code>
@@ -1159,7 +1161,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/stock</code>
                             <span class="request__info">Batch update stock</span>
-                            <span class="request__requirements">requires a direct array of stock objects</span>
+                            <span class="request__requirements">requires a direct array of stock objects, e.g. <code>[{"code": "xyz", "stock": 84, "cost": "3.50"}]</code></span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/stock/<strong>{id}</strong></code>
