@@ -22,6 +22,11 @@ code:not([class]) {
 	overflow: auto;
 	max-width: 100%;
 	vertical-align: middle;
+	border-radius: 2px;
+}
+
+h2, h3 {
+	color: #282c34;
 }
 
 a {
@@ -155,30 +160,67 @@ a {
 .doc-section h2 {
 	font-size: 24px;
 	margin: 0 0 15px;
-	color: #282c34;
 }
 
-[data-http-method]::before {
+/* each API request */
+.request {
+	margin-bottom: 12px;
+	background-color: #FFF;
+	border-radius: 5px;
+    overflow: hidden;
+}
+.request__url,
+.request__filters,
+.request__info,
+.request__requirements {
+	display: block;
+	padding: 6px;
+}
+.request__filters,
+.request__requirements {
+	font-size: small;	
+}
+.request__url {
+	overflow: auto;
+	background: rgba(40, 44, 52, .9);
+	color: #FFF;
+}
+
+.request[data-http-method]::before {
 	content: attr(data-http-method);
-	display: inline-block;
-	padding: 2px 6px;
+	float: left;
+	padding: 6px;
 	background: #282c34;
 	font-weight: bold;
 	color: #FFF;
-	margin-bottom: 2px;
 }
-[data-http-method="GET"]::before {
+.request[data-http-method="GET"]::before {
 	color: #4CAF50;
 }
-[data-http-method="POST"]::before {
+.request[data-http-method="POST"]::before {
 	color: #FF9800;
 }
-[data-http-method="DELETE"]::before {
+.request[data-http-method="DELETE"]::before {
 	color: #F44336;
 }
 
+.request code:not([class]) {
+	background: rgba(40, 44, 52, .2);
+	margin-bottom: 1px;
+}
+
+.endpoint {
+	margin-bottom: 30px;
+}
 .endpoint ul {
 	padding: 0;
 	margin: 0;
 	list-style: none;
+}
+
+.endpoint__identifiers {
+	font-size: small;
+	display: block;
+	margin-top: -10px;
+	margin-bottom: 10px;
 }

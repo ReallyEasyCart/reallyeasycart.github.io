@@ -46,7 +46,7 @@
                     <a href="#auth-scopes">Auth & Scopes</a>
                 </li>
                 <li>
-                    <a href="#access-examples">Access Examples</a>
+                    <a href="#request-examples">Request Examples</a>
                 </li>
                 <li>
                     <a href="#responses">Responses</a>
@@ -118,7 +118,7 @@
 
             <section class="doc-section">
                 <header>
-                    <h2 id="access-examples">Access Examples</h2>
+                    <h2 id="request-examples">Request Examples</h2>
                 </header>
 
                 <p>
@@ -217,6 +217,8 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
     'test2',
 ]));
 </code></pre>
+
+                <p>HTTP methods indicate the type of request, e.g. to lookup a collection of objects or a specific object use <code>GET</code>. Creating or updating an object uses <code>POST</code> <small>(<code>PATCH</code> also supported for updates but is treated the same as <code>POST</code>, both support partial updates)</small>. To remove/delete a resource use <code>DELETE</code>. Batch creates, updates & deletes are also supported.</p>
 
             </section>
 
@@ -769,255 +771,499 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <p>Here's a list of the API resources available under <code>/api/v1...</code>:</p>
 
                 <div class="endpoint">
-                    <h3>Blog Posts:</h3>
+                    <h3>Blog Posts</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/blog-posts</code> - List of blog posts <small>[filters: category (filter blog posts by category id)]</small></li>
-                        <li data-http-method="GET"><code>/blog-posts/:id</code> - List of blog posts</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Categories:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/categories</code> - List collection of categories <small>[filters: parent (filter by parent category id)]</small></li>
-                        <li data-http-method="GET"><code>/categories/:id</code> - Retrieve data on a specific category</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Coupons:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/coupons</code> - List collection of coupons</li>
-                        <li data-http-method="GET"><code>/coupons/:id</code> - Retrieve a specific coupon</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Delivery Methods:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/delivery-methods</code> - List collection of delivery methods</li>
-                        <li data-http-method="GET"><code>/delivery-methods/:id</code> - Retrieve a specific delivery method</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Departments:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/departments</code> - List collection of departments</li>
-                        <li data-http-method="GET"><code>/departments/:id</code> - Retrieve specific department</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Downloads:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/downloads</code> - List collection of downloads <small>[filters: category (filter downloads by category id), ids (filter downloads by a comma separated list of ids)]</small></li>
-                        <li data-http-method="GET"><code>/downloads/:id</code> - Retrieve data on a specific download</li>
-                        <li data-http-method="POST"><code>/downloads</code> - Batch create or update downloads <small>[required fields: name, src]</small></li>
-                        <li data-http-method="POST"><code>/downloads/:id</code> - Update a specific download</li>
-                        <li data-http-method="DELETE"><code>/downloads</code> - Batch delete downloads</li>
-                        <li data-http-method="DELETE"><code>/downloads/:id</code> - Delete a specific download</li>
-                        <li>These all also support the following "identifier" url params: id, srchash - a sha1 of the initial location, if updated later the initial/previous srchash is maintained</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Download categories:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/download-categories</code> - List collection of downloads categories</li>
-                        <li data-http-method="GET"><code>/download-categories/:id</code> - Retrieve data on a specific download category</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Gallery:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/gallery</code> - List of gallery images <small>[filters: album (filter gallery images by album id)]</small></li>
-                        <li data-http-method="GET"><code>/gallery/:id</code> - Retrieve data on a specific gallery image</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Google Reviews:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/google-reviews</code> - List of google reviews for the site <small>[filters: average (filter by minimum average rating)]</small></li>
-                        <li data-http-method="GET"><code>/google-reviews/:id</code> - Retrieve data on a specific review</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Manufacturers:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/manufacturers</code> - List collection of manufacturers</li>
-                        <li data-http-method="GET"><code>/manufacturers/:id</code> - Retrieve specific manufacturer</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Newsletters:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/newsletters</code> - List collection of newsletters</li>
-                        <li data-http-method="GET"><code>/newsletters/:id</code> - Retrieve a specific newsletter</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Options:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/options</code> - List collection of options</li>
-                        <li data-http-method="GET"><code>/options/:id</code> - Retrieve data on a specific option</li>
-                        <li data-http-method="POST"><code>/options</code> - Batch create or update options <small>[required fields: product_id, group (e.g. Size), desc (e.g. Medium)]</small></li>
-                        <li data-http-method="POST"><code>/options/:id</code> - Update a specific option</li>
-                        <li data-http-method="DELETE"><code>/options</code> - Batch delete options</li>
-                        <li data-http-method="DELETE"><code>/options/:id</code> - Delete a specific option</li>
-                        <li>These all also support the following "identifier" url params: id, code, name</li>
-                        <li>You can also manage options directly on their products.</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Orders:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/orders</code> - List collection of orders <small>[filters: since_timestamp (filter to orders placed since timestamp, e.g. ?since_timestamp=1591970309 or ?since_timestamp=2020-06-11T07:45:02 - both accepted)]</small></li>
-                        <li data-http-method="GET"><code>/orders/:id</code> - Retrieve data on a specific order</li>
-                        <li data-http-method="POST"><code>/orders</code> - Batch update orders
-                            <br><small>[required fields: status (see Admin > Order Statuses)] [updatable fields: customers_order_id, fob, purchase_order_number, required_by_date, status, delivery_note]</small></li>
-                        <li data-http-method="POST"><code>/orders/:id</code> - Update a specific order</li>
-                        <li>These all also support the following "identifier" url params: id, invoice_id</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Pages:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/pages</code> - List collection of pages <small>[filters: parent (id of parent page)]</small></li>
-                        <li data-http-method="GET"><code>/pages/:id</code> - Retrieve a specific page</li>
-                        <li>These all also support the following "identifier" url params: id, slug</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Payment Methods:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/payment-methods</code> - List collection of payment methods</li>
-                        <li data-http-method="GET"><code>/payment-methods/:id</code> - Retrieve a specific payment method</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Product Filter Blocks:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/product-filter-blocks</code> - List collection of product filter search blocks <small>[filters: remaining_only (filter to only show product filter blocks with remaining products)]</small></li>
-                        <li data-http-method="GET"><code>/product-filter-blocks/:id</code> - Retrieve data on a specific product filter search blocks</li>
-                        <li data-http-method="GET"><code>/products/filter/size,med/color,red,blue</code> - Filter the blocks returned with filter params</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Product Reviews:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/product-reviews</code> - List collection of product reviews <small>[filters: product_id, featured, score_over, verified_purchase]</small></li>
-                        <li data-http-method="GET"><code>/product-reviews/:id</code> - Retrieve a specific product review</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Products:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/products</code> - List / filter collection of products
-                            <br><small>[filters: use_non_vat_prices=1 (use non-VAT prices), ids (comma separated ids), category (filter to products in a specific category id), status, tags, q (text search over: id, code, name, desc columns, restrict these fields with q_fields)]</small></li>
-                        <li data-http-method="GET"><code>/products/:id</code> - Retrieve data on a specific product</li>
-                        <li data-http-method="POST"><code>/products</code> - Batch create or update products
-                            <br><small>[required fields: name] [suggested fields: code, desc, price, image, status (draft, live, featured, special_offer, upcoming, deleted)]</small></li>
-                        <li data-http-method="POST"><code>/products/:id</code> - Update a specific product</li>
-                        <li data-http-method="DELETE"><code>/products</code> - Batch delete products</li>
-                        <li data-http-method="DELETE"><code>/products/:id</code> - Delete a specific product</li>
-                        <li data-http-method="GET"><code>/products/filter/size,med/color,red,blue</code> - Filter products returned with filter params</li>
-                        <li>These all also support the following "identifier" url params: id, code, name, e.g. <code>/products/:code?identifier=code</code></li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Regions:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/regions</code> - List collection of categories</li>
-                        <li data-http-method="GET"><code>/regions/:id</code> - Retrieve data on a specific category</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Sliders:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/sliders</code> - List collection of sliders</li>
-                        <li data-http-method="GET"><code>/sliders/:id</code> - Retrieve a specific slider</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Stock:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/stock</code> - List stock with code, stock qty & costs <small>[filters: codes (filter stock by a comma separated list of codes)]</small></li>
-                        <li data-http-method="GET"><code>/stock/:id</code> - Retrieve a code's stock</li>
-                        <li data-http-method="POST"><code>/stock</code> - Batch update stock <small>[required fields: code, stock]</small></li>
-                        <li data-http-method="POST"><code>/stock/:id</code> - Update a specific code's stock</li>
-                        <li>The difference to the products resouce is this a simpler endpoint that also supports variation codes and stock.</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Testimonials:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/testimonials</code> - List collection of testimonials</li>
-                        <li data-http-method="GET"><code>/testimonials/:id</code> - Retrieve a specific testimonial</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>User Groups:</h3>
-                    <ul>
-                        <li data-http-method="GET"><code>/user-groups</code> - List collection of user groups</li>
-                        <li data-http-method="GET"><code>/user-groups/:id</code> - Retrieve data on a specific user group</li>
-                        <li data-http-method="POST"><code>/user-groups</code> - Batch create or update user groups <small>[required fields: name]</small></li>
-                        <li data-http-method="POST"><code>/user-groups/:id</code> - Update a specific user group</li>
-                        <li data-http-method="DELETE"><code>/user-groups</code> - Batch delete user groups</li>
-                        <li data-http-method="DELETE"><code>/user-groups/:id</code> - Delete a specific user group</li>
-                        <li>These all also support the following "identifier" url params: id, name</li>
-                    </ul>
-                </div>
-
-                <div class="endpoint">
-                    <h3>Userfiles:</h3>
-                    <ul>
-                        <li data-http-method="POST"><code>/userfiles</code> - Create or update files to store such as product or category images.
-                            <br><small>[required fields: "filename" (e.g. "/userfiles/images/sys/x/y/z.png") and "body" (e.g. "data:image/png;base64,...")]</small>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/blog-posts</code>
+                            <span class="request__info">List of blog posts</span>
+                            <span class="request__filters">filters: <code>category</code> - category id</span>
                         </li>
-                        <li data-http-method="DELETE"><code>/userfiles</code> - Delete a specific file, pass an object with the filename inside.</li>
-                        <li>This is an alternative to using FTP, supports managing a single file/image at a time.
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/blog-posts/<strong>{id}</strong></code>
+                            <span class="request__info">List of blog posts</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/categories</code>
+                            <span class="request__info">List collection of categories</span>
+                            <span class="request__filters">filters: <code>parent</code> - filter by parent category id</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/categories/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific category</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Coupons</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/coupons</code>
+                            <span class="request__info">List collection of coupons</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/coupons/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve a specific coupon</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Delivery Methods</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/delivery-methods</code>
+                            <span class="request__info">List collection of delivery methods</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/delivery-methods/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve a specific delivery method</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Departments</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/departments</code>
+                            <span class="request__info">List collection of departments</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/departments/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve specific department</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Downloads</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>srchash</code> - a sha1 of the initial location, if updated later the initial/previous srchash is maintained</li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/downloads</code>
+                            <span class="request__info">List collection of downloads</span>
+                            <span class="request__filters">filters: <code>category</code> - filter downloads by category id, <code>ids</code> - filter downloads by a comma separated list of ids</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/downloads/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific download</span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/downloads</code>
+                            <span class="request__info">Batch create or update downloads</span>
+                            <span class="request__requirements">required fields: <code>name</code>, <code>src</code></span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/downloads/<strong>{id}</strong></code>
+                            <span class="request__info">Update a specific download</span>
+                        </li>
+                        <li class="request" data-http-method="DELETE">
+                            <code class="request__url">/downloads</code>
+                            <span class="request__info">Batch delete downloads</span>
+                        </li>
+                        <li class="request" data-http-method="DELETE">
+                            <code class="request__url">/downloads/<strong>{id}</strong></code>
+                            <span class="request__info">Delete a specific download</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Download categories</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/download-categories</code>
+                            <span class="request__info">List collection of downloads categories</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/download-categories/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific download category</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Gallery</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/gallery</code>
+                            <span class="request__info">List of gallery images</span>
+                            <span class="request__filters">filters: <code>album</code> - filter gallery images by album id</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/gallery/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific gallery image</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Google Reviews</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/google-reviews</code>
+                            <span class="request__info">List of google reviews for the site</span>
+                            <span class="request__filters">filters: <code>average</code> - filter by minimum average rating</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/google-reviews/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific review</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Manufacturers</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/manufacturers</code>
+                            <span class="request__info">List collection of manufacturers</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/manufacturers/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve specific manufacturer</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Newsletters</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/newsletters</code>
+                            <span class="request__info">List collection of newsletters</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/newsletters/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve a specific newsletter</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Options</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>code</code>, <code>name</code></li>
+                        <li class="endpoint__identifiers">You can also manage options directly on their products.</li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/options</code>
+                            <span class="request__info">List collection of options</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/options/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific option</span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/options</code>
+                            <span class="request__info">Batch create or update options</span>
+                            <span class="request__requirements">required fields: <code>product_id</code>, <code>group</code> (e.g. Size), <code>desc</code> (e.g. Medium)</span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/options/<strong>{id}</strong></code>
+                            <span class="request__info">Update a specific option</span>
+                        </li>
+                        <li class="request" data-http-method="DELETE">
+                            <code class="request__url">/options</code>
+                            <span class="request__info">Batch delete options</span>
+                        </li>
+                        <li class="request" data-http-method="DELETE">
+                            <code class="request__url">/options/<strong>{id}</strong></code>
+                            <span class="request__info">Delete a specific option</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Orders</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>invoice_id</code></li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/orders</code>
+                            <span class="request__info">List collection of orders</span>
+                            <span class="request__filters">filters: <code>since_timestamp</code> (orders placed since timestamp, e.g. <code>?since_timestamp=1591970309</code> or <code>?since_timestamp=2020-06-11T07:45:02</code> - both accepted)</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/orders/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific order</span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/orders</code>
+                            <span class="request__info">Batch update orders</span>
+                            <span class="request__requirements">required fields: <code>status</code> (see Admin > Order Statuses)</span>
+                            <span class="request__requirements">updatable fields: <code>customers_order_id</code>, <code>fob</code>, <code>purchase_order_number</code>, <code>required_by_date</code>, <code>status</code>, <code>delivery_note</code></span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/orders/<strong>{id}</strong></code>
+                            <span class="request__info">Update a specific order</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Pages</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>slug</code></li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/pages</code>
+                            <span class="request__info">List collection of pages</span>
+                            <span class="request__filters">filters: parent (id of parent page)</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/pages/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve a specific page</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Payment Methods</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/payment-methods</code>
+                            <span class="request__info">List collection of payment methods</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/payment-methods/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve a specific payment method</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Product Filter Blocks</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/product-filter-blocks</code>
+                            <span class="request__info">List collection of product filter search blocks</span>
+                            <span class="request__filters">filters: <code>remaining_only</code> (filter to only show product filter blocks with remaining products)</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/product-filter-blocks/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific product filter search blocks</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/products/filter/<strong>size,med/color,red,blue</strong></code>
+                            <span class="request__info">Filter the blocks returned with filter params (based on site front end product filter params)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Product Reviews</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/product-reviews</code>
+                            <span class="request__info">List collection of product reviews</span>
+                            <span class="request__filters">filters: <code>product_id</code>, <code>featured</code>, <code>score_over</code>, <code>verified_purchase</code></span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/product-reviews/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve a specific product review</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Products</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>code</code>, <code>name</code>, e.g. <code>/products/{code}?identifier=code</code></li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/products</code>
+                            <span class="request__info">List / filter collection of products</span>
+                            <span class="request__filters">filters: <code>use_non_vat_prices=1</code> (use non-VAT prices), <code>ids</code> (comma separated ids), <code>category</code> (filter to products in a specific category id), <code>status</code>, <code>tags</code>, <code>q</code> (text search over: id, code, name, desc columns, optionally restrict these fields with <code>q_fields</code>)</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/products/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific product</span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/products</code>
+                            <span class="request__info">Batch create or update products</span>
+                            <span class="request__requirements">required fields: <code>name</code></span>
+                            <span class="request__requirements">suggested fields: <code>code</code>, <code>desc</code>, <code>price</code>, <code>image</code>, <code>status</code> (draft, live, featured, special_offer, upcoming, deleted)</span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/products/<strong>{id}</strong></code>
+                            <span class="request__info">Update a specific product</span>
+                        </li>
+                        <li class="request" data-http-method="DELETE">
+                            <code class="request__url">/products</code>
+                            <span class="request__info">Batch delete products</span>
+                        </li>
+                        <li class="request" data-http-method="DELETE">
+                            <code class="request__url">/products/<strong>{id}</strong></code>
+                            <span class="request__info">Delete a specific product</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/products/filter/<strong>size,med/color,red,blue</strong></code>
+                            <span class="request__info">Filter products returned with filter params (based on site front end product filter params)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Regions</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/regions</code>
+                            <span class="request__info">List collection of categories</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/regions/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific category</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Sliders</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/sliders</code>
+                            <span class="request__info">List collection of sliders</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/sliders/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve a specific slider</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Stock</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">The difference between this and the products resouce is this a simpler stock focused endpoint, that also supports variation level codes and stock.</li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/stock</code>
+                            <span class="request__info">List stock with code, stock qty & costs</span>
+                            <span class="request__filters">filters: <code>codes</code> (filter stock by a comma separated list of codes)</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/stock/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve a code's stock</span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/stock</code>
+                            <span class="request__info">Batch update stock</span>
+                            <span class="request__requirements">required fields: <code>code</code>, <code>stock</code></span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/stock/<strong>{id}</strong></code>
+                            <span class="request__info">Update a specific code's stock</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Testimonials</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/testimonials</code>
+                            <span class="request__info">List collection of testimonials</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/testimonials/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve a specific testimonial</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>User Groups</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>name</code></li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/user-groups</code>
+                            <span class="request__info">List collection of user groups</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/user-groups/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific user group</span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/user-groups</code>
+                            <span class="request__info">Batch create or update user groups</span>
+                            <span class="request__requirements">required fields: <code>name</code></span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/user-groups/<strong>{id}</strong></code>
+                            <span class="request__info">Update a specific user group</span>
+                        </li>
+                        <li class="request" data-http-method="DELETE">
+                            <code class="request__url">/user-groups</code>
+                            <span class="request__info">Batch delete user groups</span>
+                        </li>
+                        <li class="request" data-http-method="DELETE">
+                            <code class="request__url">/user-groups/<strong>{id}</strong></code>
+                            <span class="request__info">Delete a specific user group</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="endpoint">
+                    <h3>Userfiles</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">This is an alternative to using FTP, supports managing a single file/image at a time.
                             <br>FTP support is also available for sites & API integrations directly to the userfiles directory.</li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/userfiles</code>
+                            <span class="request__info">Create or update files to store such as product or category images.</span>
+                            <span class="request__requirements">required fields: <code>filename</code> (e.g. "/userfiles/images/sys/x/y/z.png") and "body" (e.g. "data:image/png;base64,...")</small>
+                        </li>
+                        <li class="request" data-http-method="DELETE">
+                            <code class="request__url">/userfiles</code>
+                            <span class="request__info">Delete a specific file, pass an object with the filename inside.</span>
+                        </li>
                     </ul>
                 </div>
 
                 <div class="endpoint">
-                    <h3>Users:</h3>
+                    <h3>Users</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/users</code> - List collection of users <small>[filters: use_non_vat_prices=1 (use non-VAT prices for per user delivery_charges)]</small></li>
-                        <li data-http-method="GET"><code>/users/:id</code> - Retrieve data on a specific user</li>
-                        <li data-http-method="POST"><code>/users</code> - Batch create or update users <small>[required fields: full_name, email]</small></li>
-                        <li data-http-method="POST"><code>/users/:id</code> - Update a specific user</li>
-                        <li>These all also support the following "identifier" url params: id, membership_code, email</li>
+                        <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>membership_code</code>, <code>email</code></li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/users</code>
+                            <span class="request__info">List collection of users</span>
+                            <span class="request__filters">filters: <code>use_non_vat_prices=1</code> (use non-VAT prices for per user delivery_charges)</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/users/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve data on a specific user</span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/users</code>
+                            <span class="request__info">Batch create or update users</span>
+                            <span class="request__requirements">required fields: <code>full_name</code>, <code>email</code></span>
+                        </li>
+                        <li class="request" data-http-method="POST">
+                            <code class="request__url">/users/<strong>{id}</strong></code>
+                            <span class="request__info">Update a specific user</span>
+                        </li>
                     </ul>
                 </div>
 
                 <div class="endpoint">
-                    <h3>VAT Types:</h3>
+                    <h3>VAT Types</h3>
                     <ul>
-                        <li data-http-method="GET"><code>/vat-types</code> - List collection of vat types</li>
-                        <li data-http-method="GET"><code>/vat-types/:id</code> - Retrieve specific vat type</li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/vat-types</code>
+                            <span class="request__info">List collection of vat types</span>
+                        </li>
+                        <li class="request" data-http-method="GET">
+                            <code class="request__url">/vat-types/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve specific vat type</span>
+                        </li>
                     </ul>
                 </div>
 
-                <br>
-
+                <p>Some of the above resources show identifiers supported. If not otherwise shown, ID is assumed. For those with multiple possible identifiers, these give you an alternative to lookup resources using the <code>identifier</code> param, e.g. products support <code>?identifier=code</code>.</p>
                 <p>All collection resources support <code>limit</code> and <code>offset</code> which can be used to page through results, generally the default on lists is 25 and the max for the limit is generally 1000. See examples in the <code>paging</code> property of collection responses.</p>
                 <p>Also most collection resources should support the <code>fields=*</code> url param, which allows full data on each views to be pulled back instead of just the basic data. </p>
                 <p>The following resources also allow a <code>diffOnly=true</code> url param to show only changes that would be made without applying them live: downloads, options, orders, products, stock, user groups, users.</p>
