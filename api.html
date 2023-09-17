@@ -868,6 +868,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/downloads</code>
                             <span class="request__info">Batch delete downloads</span>
+                            <span class="request__requirements">required fields: <code>ids</code> - comma separated list of ids to delete</span>
                         </li>
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/downloads/<strong>{id}</strong></code>
@@ -974,6 +975,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/options</code>
                             <span class="request__info">Batch delete options</span>
+                            <span class="request__requirements">required fields: <code>ids</code> - comma separated list of ids to delete</span>
                         </li>
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/options/<strong>{id}</strong></code>
@@ -1100,6 +1102,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/products</code>
                             <span class="request__info">Batch delete products</span>
+                            <span class="request__requirements">required fields: <code>ids</code> - comma separated list of ids to delete</span>
                         </li>
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/products/<strong>{id}</strong></code>
@@ -1205,6 +1208,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/user-groups</code>
                             <span class="request__info">Batch delete user groups</span>
+                            <span class="request__requirements">required fields: <code>ids</code> - comma separated list of ids to delete</span>
                         </li>
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/user-groups/<strong>{id}</strong></code>
