@@ -768,7 +768,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <h2 id="resources">Resources</h2>
                 </header>
 
-                <p>Here's a list of the API resources available under <code>/api/v1...</code>:</p>
+                <p>Here's a list of the API resources available under <code>/api/v1</code>:</p>
 
                 <div class="endpoint">
                     <h3>Blog Posts</h3>
@@ -1263,12 +1263,13 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <p>Some of the above resources show identifiers supported. If not otherwise shown, ID is assumed. For those with multiple possible identifiers, these give you an alternative to lookup resources using the <code>identifier</code> param, e.g. products support <code>?identifier=code</code>.</p>
+                <p>Some of the above resources show identifiers supported. If not otherwise shown, ID is assumed. For those with multiple possible identifiers, these give you an alternative to lookup resources using the <code>identifier</code> param, e.g. products support product code based lookups with <code>/products/{code}?identifier=code</code>.</p>
                 <p>All collection resources support <code>limit</code> and <code>offset</code> which can be used to page through results, generally the default on lists is 25 and the max for the limit is generally 1000. See examples in the <code>paging</code> property of collection responses.</p>
                 <p>Also most collection resources should support the <code>fields=*</code> url param, which allows full data on each views to be pulled back instead of just the basic data. </p>
                 <p>The following resources also allow a <code>diffOnly=true</code> url param to show only changes that would be made without applying them live: downloads, options, orders, products, stock, user groups, users.</p>
                 <p>For JSON responses, there's a <code>prettyPrint=true</code> param which can be useful as well as a <code>callback</code> param for front-end JSONP support if needed.</p>
                 <p>For POST updates, we recommend sending JSON as the request body. However if you'd prefer to use form-urlencoded params the you can send the JSON in a <code>packet</code> param.</p>
+                <p>Need access to anything not currently available or other new API functionality? <a href="https://support.reallyeasycart.co.uk/support/tickets/new" target="_blank">Request via a support ticket</a>.</p>
 
             </section>
 
@@ -1326,9 +1327,9 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
 
                 <p>This quick overview is meant to help get you started with the API.</p>
 
-                <p>We also have <a href="https://reallyeasycart.freshdesk.com/support/solutions/folders/269622">additional documentation available here</a>.</p>
+                <p>We also have <a href="https://support.reallyeasycart.co.uk/support/solutions/folders/269622">additional documentation available here</a>.</p>
 
-                <p>Please also feel free to contact us via our <a href="https://reallyeasycart.freshdesk.com/support">support tickets here</a>.</p>
+                <p>Please also feel free to contact us via our <a href="https://support.reallyeasycart.co.uk/support/tickets/new">support tickets here</a>.</p>
 
                 <p>Thanks for reading.</p>
             </section>
