@@ -858,11 +858,12 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/downloads</code>
                             <span class="request__info">Batch create or update downloads</span>
-                            <span class="request__requirements">required fields: <code>name</code>, <code>src</code></span>
+                            <span class="request__requirements">required fields: <code>downloads</code> - array of download objects</span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/downloads/<strong>{id}</strong></code>
                             <span class="request__info">Update a specific download</span>
+                            <span class="request__requirements">required fields: <code>name</code>, <code>src</code></span>
                         </li>
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/downloads</code>
@@ -951,7 +952,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     <h3>Options</h3>
                     <ul>
                         <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>code</code>, <code>name</code></li>
-                        <li class="endpoint__identifiers">You can also manage options directly on their products.</li>
+                        <li class="endpoint__identifiers">Though this resource is available, it's recommended to manage options directly on their products.</li>
                         <li class="request" data-http-method="GET">
                             <code class="request__url">/options</code>
                             <span class="request__info">List collection of options</span>
@@ -963,11 +964,12 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/options</code>
                             <span class="request__info">Batch create or update options</span>
-                            <span class="request__requirements">required fields: <code>product_id</code>, <code>group</code> (e.g. Size), <code>desc</code> (e.g. Medium)</span>
+                            <span class="request__requirements">required fields: <code>options</code> - array of option objects</span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/options/<strong>{id}</strong></code>
                             <span class="request__info">Update a specific option</span>
+                            <span class="request__requirements">required fields: <code>product_id</code>, <code>group</code> (e.g. Size), <code>desc</code> (e.g. Medium)</span>
                         </li>
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/options</code>
@@ -996,12 +998,13 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/orders</code>
                             <span class="request__info">Batch update orders</span>
-                            <span class="request__requirements">required fields: <code>status</code> (see Admin > Order Statuses)</span>
-                            <span class="request__requirements">updatable fields: <code>customers_order_id</code>, <code>fob</code>, <code>purchase_order_number</code>, <code>required_by_date</code>, <code>status</code>, <code>delivery_note</code></span>
+                            <span class="request__requirements">required fields: <code>orders</code> - array of order objects</span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/orders/<strong>{id}</strong></code>
                             <span class="request__info">Update a specific order</span>
+                            <span class="request__requirements">required fields: <code>status</code> (see Admin > Order Statuses)</span>
+                            <span class="request__requirements">updatable fields: <code>customers_order_id</code>, <code>fob</code>, <code>purchase_order_number</code>, <code>required_by_date</code>, <code>status</code>, <code>delivery_note</code></span>
                         </li>
                     </ul>
                 </div>
@@ -1086,12 +1089,13 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/products</code>
                             <span class="request__info">Batch create or update products</span>
-                            <span class="request__requirements">required fields: <code>name</code></span>
-                            <span class="request__requirements">suggested fields: <code>code</code>, <code>desc</code>, <code>price</code>, <code>image</code>, <code>status</code> (draft, live, featured, special_offer, upcoming, deleted)</span>
+                            <span class="request__requirements">required fields: <code>products</code> - array of product objects</span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/products/<strong>{id}</strong></code>
                             <span class="request__info">Update a specific product</span>
+                            <span class="request__requirements">required fields: <code>name</code></span>
+                            <span class="request__requirements">suggested fields: <code>code</code>, <code>desc</code>, <code>price</code>, <code>image</code>, <code>status</code> (draft, live, featured, special_offer, upcoming, deleted)</span>
                         </li>
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/products</code>
@@ -1139,7 +1143,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                 <div class="endpoint">
                     <h3>Stock</h3>
                     <ul>
-                        <li class="endpoint__identifiers">The difference between this and the products resouce is this a simpler stock focused endpoint, that also supports variation level codes and stock.</li>
+                        <li class="endpoint__identifiers">The difference between this and the products resource is this a simpler stock focused endpoint, that also supports variation level codes and stock.</li>
                         <li class="request" data-http-method="GET">
                             <code class="request__url">/stock</code>
                             <span class="request__info">List stock with code, stock qty & costs</span>
@@ -1152,11 +1156,12 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/stock</code>
                             <span class="request__info">Batch update stock</span>
-                            <span class="request__requirements">required fields: <code>code</code>, <code>stock</code></span>
+                            <span class="request__requirements">requires a direct array of stock objects</span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/stock/<strong>{id}</strong></code>
                             <span class="request__info">Update a specific code's stock</span>
+                            <span class="request__requirements">required fields: <code>code</code>, <code>stock</code></span>
                         </li>
                     </ul>
                 </div>
@@ -1190,11 +1195,12 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/user-groups</code>
                             <span class="request__info">Batch create or update user groups</span>
-                            <span class="request__requirements">required fields: <code>name</code></span>
+                            <span class="request__requirements">required fields: <code>user-groups</code> - array of user-group objects</span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/user-groups/<strong>{id}</strong></code>
                             <span class="request__info">Update a specific user group</span>
+                            <span class="request__requirements">required fields: <code>name</code></span>
                         </li>
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/user-groups</code>
@@ -1215,11 +1221,11 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/userfiles</code>
                             <span class="request__info">Create or update files to store such as product or category images.</span>
-                            <span class="request__requirements">required fields: <code>filename</code> (e.g. "/userfiles/images/sys/x/y/z.png") and "body" (e.g. "data:image/png;base64,...")</small>
+                            <span class="request__requirements">required fields: <code>filename</code> (e.g. "/userfiles/images/sys/x/y/z.png") and <code>body</code> (e.g. "data:image/png;base64,...")</small>
                         </li>
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/userfiles</code>
-                            <span class="request__info">Delete a specific file, pass an object with the filename inside.</span>
+                            <span class="request__info">Delete a specific file, pass an object with the <code>filename</code> inside.</span>
                         </li>
                     </ul>
                 </div>
@@ -1240,11 +1246,12 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/users</code>
                             <span class="request__info">Batch create or update users</span>
-                            <span class="request__requirements">required fields: <code>full_name</code>, <code>email</code></span>
+                            <span class="request__requirements">required fields: <code>users</code> - array of user objects</span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/users/<strong>{id}</strong></code>
                             <span class="request__info">Update a specific user</span>
+                            <span class="request__requirements">required fields: <code>full_name</code>, <code>email</code></span>
                         </li>
                     </ul>
                 </div>
