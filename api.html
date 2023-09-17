@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,700">
     <link rel="stylesheet" href="/css/api.css?v5">
 </head>
@@ -51,7 +51,7 @@
                     <a href="#auth-scopes">Auth & Scopes</a>
                 </li>
                 <li>
-                    <a class="toggle-sub-links"></a>
+                    <a class="toggle-sub-links" href="#"></a>
                     <a href="#request-examples">Request Examples</a>
                     <ul>
                         <li><a href="#request-examples--curl">curl</a></li>
@@ -59,7 +59,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="toggle-sub-links"></a>
+                    <a class="toggle-sub-links" href="#"></a>
                     <a href="#responses">Response Examples</a>
                     <ul>
                         <li><a href="#responses">Products collection</a></li>
@@ -69,7 +69,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="toggle-sub-links"></a>
+                    <a class="toggle-sub-links" href="#"></a>
                     <a href="#resources">Resources</a>
                     <ul>
                         <li><a href="#resources--blog-posts">Blog Posts</a></li>
@@ -1135,8 +1135,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="GET">
                             <code class="request__url">/products/<strong>{id}</strong></code>
                             <span class="request__info">Retrieve data on a specific product</span>
-                            <span class="request__requirements">Sites using variations (option combinations of products) allow lookups by both product code and variation code using the code identifier. However updates and deletes are on top level products only. For variation level changes to prices use product options and variation stock/cost updates use the <code>/stock</code> resource.</small>
-                            </span>
+                            <span class="request__requirements">Sites using variations (option combinations of products) allow lookups by both product code and variation code using the code identifier. However updates and deletes are on top level products only. For variation level changes to prices use product options and variation stock/cost updates use the <code>/stock</code> resource.</span>
                         </li>
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/products</code>
@@ -1275,7 +1274,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="POST">
                             <code class="request__url">/userfiles</code>
                             <span class="request__info">Create or update files to store such as product or category images.</span>
-                            <span class="request__requirements">required fields: <code>filename</code> (e.g. "/userfiles/images/sys/x/y/z.png") and <code>body</code> (e.g. "data:image/png;base64,...")</small>
+                            <span class="request__requirements">required fields: <code>filename</code> (e.g. "/userfiles/images/sys/x/y/z.png") and <code>body</code> (e.g. "data:image/png;base64,...")</span>
                         </li>
                         <li class="request" data-http-method="DELETE">
                             <code class="request__url">/userfiles</code>
