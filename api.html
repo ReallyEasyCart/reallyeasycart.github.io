@@ -51,13 +51,54 @@
                     <a href="#auth-scopes">Auth & Scopes</a>
                 </li>
                 <li>
+                    <a class="toggle-sub-links"></a>
                     <a href="#request-examples">Request Examples</a>
+                    <ul>
+                        <li><a href="#request-examples--curl">curl</a></li>
+                        <li><a href="#request-examples--php">PHP</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#responses">Responses</a>
+                    <a class="toggle-sub-links"></a>
+                    <a href="#responses">Response Examples</a>
+                    <ul>
+                        <li><a href="#responses">Products collection</a></li>
+                        <li><a href="#responses--product">Product</a></li>
+                        <li><a href="#responses--error">Error</a></li>
+                        <li><a href="#responses--order">Order</a></li>
+                    </ul>
                 </li>
                 <li>
+                    <a class="toggle-sub-links"></a>
                     <a href="#resources">Resources</a>
+                    <ul>
+                        <li><a href="#resources--blog-posts">Blog Posts</a></li>
+                        <li><a href="#resources--categories">Categories</a></li>
+                        <li><a href="#resources--coupons">Coupons</a></li>
+                        <li><a href="#resources--delivery-methods">Delivery Methods</a></li>
+                        <li><a href="#resources--departments">Departments</a></li>
+                        <li><a href="#resources--downloads">Downloads</a></li>
+                        <li><a href="#resources--download-categories">Download categories</a></li>
+                        <li><a href="#resources--gallery">Gallery</a></li>
+                        <li><a href="#resources--google-reviews">Google Reviews</a></li>
+                        <li><a href="#resources--manufacturers">Manufacturers</a></li>
+                        <li><a href="#resources--newsletters">Newsletters</a></li>
+                        <li><a href="#resources--options">Options</a></li>
+                        <li><a href="#resources--orders">Orders</a></li>
+                        <li><a href="#resources--pages">Pages</a></li>
+                        <li><a href="#resources--payment-methods">Payment Methods</a></li>
+                        <li><a href="#resources--product-filter-blocks">Product Filter Blocks</a></li>
+                        <li><a href="#resources--product-reviews">Product Reviews</a></li>
+                        <li><a href="#resources--products">Products</a></li>
+                        <li><a href="#resources--regions">Regions</a></li>
+                        <li><a href="#resources--sliders">Sliders</a></li>
+                        <li><a href="#resources--stock">Stock</a></li>
+                        <li><a href="#resources--testimonials">Testimonials</a></li>
+                        <li><a href="#resources--user-groups">User Groups</a></li>
+                        <li><a href="#resources--userfiles">Userfiles</a></li>
+                        <li><a href="#resources--users">Users</a></li>
+                        <li><a href="#resources--vat-types">VAT Types</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#api-webhooks">API Webhooks</a>
@@ -130,7 +171,7 @@
                     <small>Replace {DOMAIN} with the website domain name, as well as {API_USER} & {API_PASS} with your assigned API username & password.</small>
                 </p>
 
-                <p><strong>Curl:</strong></p>
+                <h3 id="request-examples--curl">Curl</h3>
 
                 <pre><code class="language-bash hljs"># Lookup all products
 curl "https://{DOMAIN}/api/v1/products" --user {API_USER}:{API_PASS}
@@ -145,7 +186,7 @@ curl -X POST -d @data.json "https://{DOMAIN}/api/v1/products/test?identifier=cod
 curl -X POST -d @data.json "https://{DOMAIN}/api/v1/products" --user {API_USER}:{API_PASS}
 </code></pre>
 
-                <p><strong>PHP:</strong></p>
+                <h3 id="request-examples--php">PHP</h3>
 
                 <pre><code class="language-php hljs">class REC
 {
@@ -229,10 +270,12 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
 
             <section class="doc-section">
                 <header>
-                    <h2 id="responses">Responses</h2>
+                    <h2 id="responses">Response Examples</h2>
                 </header>
 
                 <p>By default the API returns JSON responses however it can also return XML if needed.</p>
+
+                <p>Use Admin > <a href="#api-explorer">API Explorer</a> to view live example responses on the site.</p>
 
                 <p>All products example JSON:</p>
                 <pre><code class="language-json hljs">{
@@ -291,7 +334,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
 }
 </code></pre>
 
-                <p>Specific product example JSON:</p>
+                <p id="responses--product">Specific product example JSON:</p>
                 <pre><code class="language-json hljs">{
     "href": "\/products\/58661.json",
     "id": 58661,
@@ -516,7 +559,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
     ]
 }</code></pre>
 
-                <p>Example error response: <small>HTTP status also reflects the error status</small></p>
+                <p id="responses--error">Example error response: <small>HTTP status also reflects the error status</small></p>
                 <pre><code class="language-json hljs">{
     "errors": [
         {
@@ -526,7 +569,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
     ]
 }</code></pre>
 
-                <p>Specific order example JSON:</p>
+                <p id="responses--order">Specific order example JSON:</p>
                 <pre><code class="language-json hljs">{
     "href": "\/orders\/112312.json",
     "id": 112312,
@@ -775,7 +818,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
 
                 <p>Here's a list of the API resources available under <code>/api/v1</code>:</p>
 
-                <div class="endpoint">
+                <div id="resources--blog-posts" class="endpoint">
                     <h3>Blog Posts</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -790,7 +833,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--categories" class="endpoint">
                     <h3>Categories</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -805,7 +848,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--coupons" class="endpoint">
                     <h3>Coupons</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -819,7 +862,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--delivery-methods" class="endpoint">
                     <h3>Delivery Methods</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -833,7 +876,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--departments" class="endpoint">
                     <h3>Departments</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -847,7 +890,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--downloads" class="endpoint">
                     <h3>Downloads</h3>
                     <ul>
                         <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>srchash</code> - a sha1 of the initial location, if updated later the initial/previous srchash is maintained</li>
@@ -882,7 +925,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--download-categories" class="endpoint">
                     <h3>Download categories</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -896,7 +939,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--gallery" class="endpoint">
                     <h3>Gallery</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -911,7 +954,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--google-reviews" class="endpoint">
                     <h3>Google Reviews</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -926,7 +969,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--manufacturers" class="endpoint">
                     <h3>Manufacturers</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -940,7 +983,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--newsletters" class="endpoint">
                     <h3>Newsletters</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -954,7 +997,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--options" class="endpoint">
                     <h3>Options</h3>
                     <ul>
                         <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>code</code>, <code>name</code></li>
@@ -989,7 +1032,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--orders" class="endpoint">
                     <h3>Orders</h3>
                     <ul>
                         <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>invoice_id</code></li>
@@ -1016,7 +1059,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--pages" class="endpoint">
                     <h3>Pages</h3>
                     <ul>
                         <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>slug</code></li>
@@ -1032,7 +1075,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--payment-methods" class="endpoint">
                     <h3>Payment Methods</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -1046,7 +1089,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--product-filter-blocks" class="endpoint">
                     <h3>Product Filter Blocks</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -1065,7 +1108,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--product-reviews" class="endpoint">
                     <h3>Product Reviews</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -1080,7 +1123,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--products" class="endpoint">
                     <h3>Products</h3>
                     <ul>
                         <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>code</code>, <code>name</code>, e.g. <code>/products/{code}?identifier=code</code></li>
@@ -1122,7 +1165,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--regions" class="endpoint">
                     <h3>Regions</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -1136,7 +1179,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--sliders" class="endpoint">
                     <h3>Sliders</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -1150,7 +1193,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--stock" class="endpoint">
                     <h3>Stock</h3>
                     <ul>
                         <li class="endpoint__identifiers">The difference between this and the products resource is this a simpler stock focused endpoint, that also supports variation level codes and stock.</li>
@@ -1176,7 +1219,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--testimonials" class="endpoint">
                     <h3>Testimonials</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -1190,7 +1233,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--user-groups" class="endpoint">
                     <h3>User Groups</h3>
                     <ul>
                         <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>name</code></li>
@@ -1224,7 +1267,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--userfiles" class="endpoint">
                     <h3>Userfiles</h3>
                     <ul>
                         <li class="endpoint__identifiers">This is an alternative to using FTP, supports managing a single file/image at a time.
@@ -1241,7 +1284,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--users" class="endpoint">
                     <h3>Users</h3>
                     <ul>
                         <li class="endpoint__identifiers">identifiers: <code>id</code>, <code>membership_code</code>, <code>email</code></li>
@@ -1267,7 +1310,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
-                <div class="endpoint">
+                <div id="resources--vat-types" class="endpoint">
                     <h3>VAT Types</h3>
                     <ul>
                         <li class="request" data-http-method="GET">
@@ -1363,6 +1406,18 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/json.min.js"></script>
     <script>hljs.highlightAll();</script>
+    <script>
+    (function () {
+        var toggleSubLinks = document.querySelectorAll('.toggle-sub-links');
+        for (var i = 0; i < toggleSubLinks.length; i++) {
+            toggleSubLinks[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                var parent = this.parentNode;
+                parent.classList.toggle('open');
+            });
+        }
+    }());
+    </script>
 
 </body>
 </html>
