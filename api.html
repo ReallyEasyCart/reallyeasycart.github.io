@@ -1130,7 +1130,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="GET">
                             <code class="request__url">/products</code>
                             <span class="request__info">List / filter collection of products</span>
-                            <span class="request__filters">filters: <code>use_non_vat_prices=1</code> (use non-VAT prices), <code>ids</code> (comma separated ids), <code>category</code> (filter to products in a specific category id), <code>status</code>, <code>tags</code>, <code>q</code> (text search over: id, code, name, desc columns, optionally restrict these fields with <code>q_fields</code>)</span>
+                            <span class="request__filters">filters: <code>use_non_vat_prices=1</code> (use non-VAT prices), <code>ids</code> (comma separated ids), <code>category</code> (filter to products in a specific category id), <code>status</code>, <code>tags</code>, <code>q</code> (text search over: id, code, name, desc columns, optionally restrict these fields with <code>q_fields</code>), <code>since_timestamp</code> (products made live since timestamp, e.g. <code>?since_timestamp=1591970309</code> or <code>?since_timestamp=2020-06-11T07:45:02</code> - both accepted), <code>since_timestamp_field</code> (field to use for <code>?since_timestamp</code> - one of: live, updated), <code>sort</code> (order to return products in - sort_order, id, live, updated, name, code)</span>
                         </li>
                         <li class="request" data-http-method="GET">
                             <code class="request__url">/products/<strong>{id}</strong></code>
