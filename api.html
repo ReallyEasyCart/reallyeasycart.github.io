@@ -839,7 +839,7 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="GET">
                             <code class="request__url">/categories</code>
                             <span class="request__info">List collection of categories</span>
-                            <span class="request__filters">filters: <code>parent</code> - filter by parent category id</span>
+                            <span class="request__filters">filters: <code>parent</code> - filter by parent category id, <code>since_timestamp</code> (categories modified since timestamp, e.g. <code>?since_timestamp=1591970309</code> or <code>?since_timestamp=2020-06-11T07:45:02</code> - both accepted), <code>sort</code> (order to return products in - sort_order, id, live, updated, name)</span>
                         </li>
                         <li class="request" data-http-method="GET">
                             <code class="request__url">/categories/<strong>{id}</strong></code>
