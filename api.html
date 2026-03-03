@@ -75,18 +75,25 @@
                         <li><a href="#resources--blog-posts">Blog Posts</a></li>
                         <li><a href="#resources--categories">Categories</a></li>
                         <li><a href="#resources--coupons">Coupons</a></li>
+                        <li><a href="#resources--currency-converter">Currency Converter</a></li>
+                        <li><a href="#resources--custom-currency-rates">Custom Currency Rates</a></li>
                         <li><a href="#resources--delivery-methods">Delivery Methods</a></li>
                         <li><a href="#resources--departments">Departments</a></li>
                         <li><a href="#resources--downloads">Downloads</a></li>
                         <li><a href="#resources--download-categories">Download categories</a></li>
+                        <li><a href="#resources--forms">Forms</a></li>
                         <li><a href="#resources--gallery">Gallery</a></li>
                         <li><a href="#resources--google-reviews">Google Reviews</a></li>
+                        <li><a href="#resources--linked-products">Linked Products</a></li>
                         <li><a href="#resources--manufacturers">Manufacturers</a></li>
+                        <li><a href="#resources--modules">Modules</a></li>
                         <li><a href="#resources--newsletters">Newsletters</a></li>
                         <li><a href="#resources--options">Options</a></li>
                         <li><a href="#resources--orders">Orders</a></li>
                         <li><a href="#resources--pages">Pages</a></li>
                         <li><a href="#resources--payment-methods">Payment Methods</a></li>
+                        <li><a href="#resources--postcode-lookup">Postcode Lookup</a></li>
+                        <li><a href="#resources--price-list">Price List</a></li>
                         <li><a href="#resources--product-filter-blocks">Product Filter Blocks</a></li>
                         <li><a href="#resources--product-reviews">Product Reviews</a></li>
                         <li><a href="#resources--products">Products</a></li>
@@ -155,10 +162,11 @@
                 <p>Scopes limit the access your account has, such as if your app only needs access to Orders, you can limit your scope to only Orders. </p>
 
                 <p>Currently available scopes:
-                    <br><code>store_content</code> - Manages the products, categories, etc.
-                    <br><code>content</code> - Manages the downloads, blog_items, pages, etc.
-                    <br><code>users</code> - Manages the users, user groups, etc.)
-                    <br><code>orders</code> - Manages the orders, payment methods, delivery, etc.
+                    <br><code>store_content</code> - Manages the products, options, linked products, etc.
+                    <br><code>content</code> - Manages the downloads, modules, userfiles, etc.
+                    <br><code>users</code> - Manages the users, user groups, etc.
+                    <br><code>orders</code> - Manages the orders, coupons, payment methods, delivery, etc.
+                    <br><code>forms</code> - Access to forms and their responses.
                 </p>
             </section>
 
@@ -862,6 +870,26 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
+                <div id="resources--currency-converter" class="endpoint">
+                    <h3>Currency Converter</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET" data-access="public">
+                            <code class="request__url">/currency-converter</code>
+                            <span class="request__info">List currency exchange rates relative to the store's base currency</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="resources--custom-currency-rates" class="endpoint">
+                    <h3>Custom Currency Rates</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET" data-access="public">
+                            <code class="request__url">/custom-currency-rates</code>
+                            <span class="request__info">List custom currency rates configured for the store</span>
+                        </li>
+                    </ul>
+                </div>
+
                 <div id="resources--delivery-methods" class="endpoint">
                     <h3>Delivery Methods</h3>
                     <ul>
@@ -939,6 +967,30 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
+                <div id="resources--forms" class="endpoint">
+                    <h3>Forms</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">Only forms with API access enabled are returned.</li>
+                        <li class="request" data-http-method="GET" data-access="forms">
+                            <code class="request__url">/forms</code>
+                            <span class="request__info">List of API-enabled forms</span>
+                        </li>
+                        <li class="request" data-http-method="GET" data-access="forms">
+                            <code class="request__url">/forms/<strong>{id}</strong></code>
+                            <span class="request__info">Retrieve a specific form including its sections and fields</span>
+                        </li>
+                        <li class="request" data-http-method="GET" data-access="forms">
+                            <code class="request__url">/forms/<strong>{id}</strong>/responses</code>
+                            <span class="request__info">Paginated list of responses for a form (ordered latest first)</span>
+                            <span class="request__filters">filters: <code>limit</code>, <code>offset</code></span>
+                        </li>
+                        <li class="request" data-http-method="GET" data-access="forms">
+                            <code class="request__url">/forms/<strong>{id}</strong>/responses/<strong>{responseId}</strong></code>
+                            <span class="request__info">Retrieve a specific form response including field values</span>
+                        </li>
+                    </ul>
+                </div>
+
                 <div id="resources--gallery" class="endpoint">
                     <h3>Gallery</h3>
                     <ul>
@@ -969,6 +1021,36 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                     </ul>
                 </div>
 
+                <div id="resources--linked-products" class="endpoint">
+                    <h3>Linked Products</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">identifiers: <code>code</code></li>
+                        <li class="endpoint__identifiers">Requires the Linked Products feature to be enabled on the store.</li>
+                        <li class="request" data-http-method="GET" data-access="public">
+                            <code class="request__url">/linked-products</code>
+                            <span class="request__info">List linked product combinations</span>
+                            <span class="request__filters">filters: <code>code</code>, <code>title</code>, <code>ids</code> - comma separated list of ids</span>
+                        </li>
+                        <li class="request" data-http-method="GET" data-access="public">
+                            <code class="request__url">/linked-products/<strong>{code}</strong></code>
+                            <span class="request__info">Retrieve a specific linked product combination</span>
+                        </li>
+                        <li class="request" data-http-method="POST" data-access="store_content">
+                            <code class="request__url">/linked-products</code>
+                            <span class="request__info">Batch create or update linked products</span>
+                            <span class="request__requirements">required fields: array of linked product objects, each with a <code>code</code></span>
+                        </li>
+                        <li class="request" data-http-method="POST" data-access="store_content">
+                            <code class="request__url">/linked-products/<strong>{code}</strong></code>
+                            <span class="request__info">Create or update a specific linked product combination</span>
+                        </li>
+                        <li class="request" data-http-method="DELETE" data-access="store_content">
+                            <code class="request__url">/linked-products/<strong>{code}</strong></code>
+                            <span class="request__info">Delete a specific linked product combination</span>
+                        </li>
+                    </ul>
+                </div>
+
                 <div id="resources--manufacturers" class="endpoint">
                     <h3>Manufacturers</h3>
                     <ul>
@@ -979,6 +1061,16 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="GET" data-access="public">
                             <code class="request__url">/manufacturers/<strong>{id}</strong></code>
                             <span class="request__info">Retrieve specific manufacturer</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="resources--modules" class="endpoint">
+                    <h3>Modules</h3>
+                    <ul>
+                        <li class="request" data-http-method="GET" data-access="content">
+                            <code class="request__url">/modules/<strong>{slug}</strong></code>
+                            <span class="request__info">Retrieve a module and its items by slug</span>
                         </li>
                     </ul>
                 </div>
@@ -1085,6 +1177,33 @@ $products = REC::api('DELETE', '/products?identifier=code&ids=' . implode(',', [
                         <li class="request" data-http-method="GET" data-access="orders">
                             <code class="request__url">/payment-methods/<strong>{id}</strong></code>
                             <span class="request__info">Retrieve a specific payment method</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="resources--postcode-lookup" class="endpoint">
+                    <h3>Postcode Lookup</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">Requires the address finder adapter to be configured on the store.</li>
+                        <li class="request" data-http-method="GET" data-access="public">
+                            <code class="request__url">/postcode-lookup</code>
+                            <span class="request__info">Look up address details for a given postcode</span>
+                            <span class="request__filters">required: <code>postcode</code> - the postcode to look up</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="resources--price-list" class="endpoint">
+                    <h3>Price List</h3>
+                    <ul>
+                        <li class="endpoint__identifiers">identifiers: <code>code</code> (product or variation code)</li>
+                        <li class="request" data-http-method="GET" data-access="public">
+                            <code class="request__url">/price-list</code>
+                            <span class="request__info">List prices for all products and variations</span>
+                        </li>
+                        <li class="request" data-http-method="GET" data-access="public">
+                            <code class="request__url">/price-list/<strong>{code}</strong></code>
+                            <span class="request__info">Retrieve prices for a specific product or variation by code</span>
                         </li>
                     </ul>
                 </div>
